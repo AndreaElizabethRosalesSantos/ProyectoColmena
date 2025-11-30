@@ -1,0 +1,15 @@
+# Ignorar dependencias de Node
+node_modules/
+
+# Ignorar variables de entorno
+.env
+
+# Ignorar archivos de logs
+*.log
+
+# Ignorar compilados del frontend (React/Angular)
+front_LACOLMENA/build/
+
+# Ignorar cachés y distribuciones
+dist/
+.cache/
