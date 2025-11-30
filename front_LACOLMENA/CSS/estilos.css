@@ -1,0 +1,69 @@
+/*************************************************************************************/
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/*************************************************************************************/
+/*                                     HEADER                                        */
+/*************************************************************************************/
+/*SECCION IMAGEN LOGO*/
+.header-logo {
+    width: 100vw;       
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.header-logo img {
+    width: 100%;        /* se adapta al ancho del contenedor */
+    object-fit: cover;  /* evita que se deforme y recorta si es necesario */
+}
+
+/*SECCION DE LAS SECCIONES*/
+.section-bar {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+}
+
+/* SECCIONES A LA IZQUIERDA */
+.left-sections {
+   
+    display: flex;
+    gap: 25px;
+}
+
+.left-sections a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #483625;
+
+}
+
+/* USUARIO Y CARRITO A LA DERECHA */
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.username {
+    font-size: 16px;
+    color: #5a4a3f;
+}
+
+.right-icons a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #5a4a3f;
+}
+
+/*************************************************************************************/
+/*                                                                             */
+/*************************************************************************************/
