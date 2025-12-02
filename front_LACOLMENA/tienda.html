@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>LA COLMENA</title>
     <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/tienda.css">
+    <link rel="icon" type="image/png" href="media/favicon.png">
 </head>
 <body>
+    <!--HEADER-->
     <div class="header-logo">
         <img src="media/header.gif" alt="Logo de la tienda">
     </div>
 
     <nav class="section-bar">
         <div class="left-sections">
-            <a href="index.html">INICIO</a>
+            <a href="inicio.html">INICIO</a>
             <a href="tienda.html">TIENDA</a>
             <a href="preguntas.html">PREGUNTAS FRECUENTES</a>
             <a href="contactanos.html">CONTACTANOS</a>
@@ -25,5 +28,76 @@
         </div>
     </nav>
 
+    <!--CUERPO TIENDA-->
+    <h2>Productos</h2>
+    <div class="filters-container">
+
+        <!-- FILTRO POR CATEGORÍA -->
+        <select id="filtro-categoria">
+            <option value="">Todas las categorías</option>
+            <option value="Pura">Miel Pura</option>
+            <option value="Derivados">Productos Gourmet</option>
+            <option value="Salud">Salud y Belleza</option>
+        </select>
+
+        <!-- FILTRO POR PRECIO -->
+        <input type="number" id="precio-min" placeholder="Precio mínimo">
+        <input type="number" id="precio-max" placeholder="Precio máximo">
+
+        <!-- SOLO OFERTAS -->
+        <label><input type="checkbox" id="filtro-ofertas">Solo ofertas</label>
+
+    </div>
+
+    <div id="products"></div>
+
+    <!--FOOTER-->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>La Colmena</h4>
+                        <p>Miel 100% natural y productos derivados de la más alta calidad desde 2020.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook">📘</a>
+                            <a href="#" aria-label="Instagram">📷</a>
+                            <a href="#" aria-label="Twitter">🐦</a>
+                            <a href="#" aria-label="WhatsApp">💬</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Información</h4>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="tienda.html">Productos</a></li>
+                            <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Servicio al Cliente</h4>
+                        <ul>
+                            <li><a href="contactanos.html">Contacto</a></li>
+                            <li><a href="#">Envíos</a></li>
+                            <li><a href="#">Devoluciones</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <ul class="contact-info">
+                            <li>📞 (123) 456-7890</li>
+                            <li>✉️ info@lacolmena.com</li>
+                            <li>📍 Calle Principal #123</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer> 
+        
+    <script src="js/tienda.js"></script>
 </body>
 </html>

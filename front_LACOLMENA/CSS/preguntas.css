@@ -1,0 +1,402 @@
+/* ============================================
+   PREGUNTAS FRECUENTES - LA COLMENA
+   Temática: Abejas y Miel
+   ============================================ */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #fafafa;
+    color: #2c2c2c;
+    line-height: 1.6;
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+
+main {
+    background-color: #fff;
+}
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* ============================================
+   HEADER DE PREGUNTAS
+   ============================================ */
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-header::before {
+    content: '🐝';
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.1;
+    top: -20px;
+    right: 50px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.faq-header::after {
+    content: '🍯';
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.1;
+    bottom: -10px;
+    left: 50px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.faq-header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #5D4037;
+    margin-bottom: 16px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.faq-header p {
+    font-size: 18px;
+    color: #6D4C41;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   SECCIONES DE PREGUNTAS
+   ============================================ */
+
+.faq-section {
+    margin-bottom: 50px;
+}
+
+.faq-section h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #5D4037;
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    border-left: 5px solid #FFC107;
+    background: linear-gradient(90deg, #FFF8E1 0%, transparent 100%);
+    border-radius: 4px;
+}
+
+/* ============================================
+   ITEMS DE PREGUNTAS (ACCORDION)
+   ============================================ */
+
+.faq-item {
+    background: #ffffff;
+    border: 2px solid #FFE082;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.1);
+}
+
+.faq-item:hover {
+    border-color: #FFC107;
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Botón de Pregunta */
+.faq-question {
+    width: 100%;
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+    border: none;
+    padding: 20px 24px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: #5D4037;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.faq-question:hover {
+    background: linear-gradient(135deg, #FFE082 0%, #FFD54F 100%);
+}
+
+.faq-question span:first-child {
+    flex: 1;
+    padding-right: 20px;
+}
+
+/* Ícono */
+.faq-icon {
+    font-size: 28px;
+    font-weight: 300;
+    color: #F57C00;
+    transition: transform 0.3s ease;
+    min-width: 28px;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Contenedor de Respuesta */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    background: linear-gradient(180deg, #FFFDE7 0%, #ffffff 100%);
+}
+
+.faq-answer p {
+    padding: 0 24px;
+    color: #4E342E;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Estado Activo */
+.faq-item.active {
+    border-color: #F57C00;
+    box-shadow: 0 6px 24px rgba(245, 124, 0, 0.2);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 600px;
+    padding: 24px 0;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    color: #E65100;
+}
+
+.faq-item.active .faq-question {
+    background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+    color: #3E2723;
+}
+
+/* ============================================
+   SECCIÓN DE CONTACTO
+   ============================================ */
+
+.faq-contact {
+    background: linear-gradient(135deg, #FFC107 0%, #F57C00 100%);
+    color: white;
+    padding: 50px 40px;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 70px;
+    box-shadow: 0 8px 32px rgba(245, 124, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-contact::before {
+    content: '🐝';
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.08;
+    top: -30px;
+    left: -20px;
+    transform: rotate(-15deg);
+}
+
+.faq-contact::after {
+    content: '🍯';
+    position: absolute;
+    font-size: 100px;
+    opacity: 0.08;
+    bottom: -20px;
+    right: -20px;
+    transform: rotate(15deg);
+}
+
+.faq-contact h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.faq-contact p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: white;
+    color: #F57C00;
+    border: 2px solid white;
+}
+
+.btn-primary:hover {
+    background: #FFF8E1;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    background-color: #5D4037;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .faq-container {
+        padding: 40px 16px;
+    }
+    
+    .faq-header {
+        padding: 30px 20px;
+        margin-bottom: 40px;
+    }
+    
+    .faq-header h1 {
+        font-size: 32px;
+    }
+    
+    .faq-header p {
+        font-size: 16px;
+    }
+    
+    .faq-section h2 {
+        font-size: 22px;
+        padding: 12px 16px;
+    }
+    
+    .faq-question {
+        padding: 16px 18px;
+        font-size: 15px;
+    }
+    
+    .faq-answer p {
+        font-size: 14px;
+        padding: 0 18px;
+    }
+    
+    .faq-contact {
+        padding: 40px 24px;
+        margin-top: 50px;
+    }
+    
+    .faq-contact h3 {
+        font-size: 26px;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-header h1 {
+        font-size: 28px;
+    }
+    
+    .faq-header::before,
+    .faq-header::after {
+        font-size: 60px;
+    }
+    
+    .faq-section h2 {
+        font-size: 20px;
+    }
+    
+    .faq-question {
+        font-size: 14px;
+        padding: 14px 16px;
+    }
+    
+    .faq-icon {
+        font-size: 24px;
+    }
+}

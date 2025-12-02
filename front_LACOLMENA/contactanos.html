@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA COLMENA</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/contactanos.css">
+    <link rel="icon" type="image/png" href="media/favicon.png">
+</head>
+<body>
+    
+    <!-- HEADER CON LOGO -->
+    <div class="header-logo">
+        <img src="media/header.gif" alt="Logo de La Colmena">
+    </div>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="section-bar">
+        <div class="left-sections">
+            <a href="inicio.html">INICIO</a>
+            <a href="tienda.html">TIENDA</a>
+            <a href="preguntas.html">PREGUNTAS FRECUENTES</a>
+            <a href="contactanos.html" class="active">CONTÁCTANOS</a>
+            <a href="nosotros.html">NOSOTROS</a>
+        </div>
+
+        <div class="right-icons">
+            <a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <div class="contact-container">
+            <!-- ENCABEZADO -->
+            <header class="contact-header">
+                <h1>¡Contáctanos!</h1>
+                <p>Estamos aquí para ayudarte. Envíanos tu mensaje y te responderemos lo antes posible</p>
+            </header>
+
+            <div class="contact-wrapper">
+                <!-- FORMULARIO DE CONTACTO -->
+                <section class="contact-form-section">
+                    <div class="form-card">
+                        <h2>Envíanos un Mensaje</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="(123) 456-7890">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="asunto">Asunto</label>
+                                <select id="asunto" name="asunto" required>
+                                    <option value="">Selecciona un asunto</option>
+                                    <option value="consulta">Consulta General</option>
+                                    <option value="pedido">Información sobre Pedidos</option>
+                                    <option value="producto">Consulta sobre Productos</option>
+                                    <option value="sugerencia">Sugerencias</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                <span>Enviar Mensaje</span>
+                                <span class="btn-icon">📧</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- INFORMACIÓN DE CONTACTO -->
+                <section class="contact-info-section">
+                    <div class="info-card">
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <h3>Dirección</h3>
+                                <p>Calle Principal #123<br>Colonia Centro<br>Aguascalientes, AGS</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div class="info-content">
+                                <h3>Teléfono</h3>
+                                <p><a href="tel:+524491234567">(449) 123-4567</a></p>
+                                <p><a href="tel:+524499876543">(449) 987-6543</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-content">
+                                <h3>Email</h3>
+                                <p><a href="mailto:info@lacolmena.com">info@lacolmena.com</a></p>
+                                <p><a href="mailto:ventas@lacolmena.com">ventas@lacolmena.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">⏰</div>
+                            <div class="info-content">
+                                <h3>Horario</h3>
+                                <p>Lunes a Viernes: 9:00 AM - 7:00 PM</p>
+                                <p>Sábado: 10:00 AM - 5:00 PM</p>
+                                <p>Domingo: Cerrado</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REDES SOCIALES -->
+                    <div class="social-card">
+                        <h3>Síguenos en Redes</h3>
+                        <div class="social-buttons">
+                            <a href="#" class="social-btn facebook" aria-label="Facebook">
+                                <span class="social-icon">📘</span>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="#" class="social-btn instagram" aria-label="Instagram">
+                                <span class="social-icon">📷</span>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="social-btn whatsapp" aria-label="WhatsApp">
+                                <span class="social-icon">💬</span>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- MAPA -->
+            <section class="map-section">
+                <h2>Encuéntranos</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119066.41709474374!2d-102.36050764999999!3d21.8852562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ee8e3a691e1b%3A0x8dbb17f25fb8db30!2sAguascalientes%2C%20Ags.!5e0!3m2!1ses!2smx!4v1234567890123!5m2!1ses!2smx" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>La Colmena</h4>
+                    <p>Miel 100% natural y productos derivados de la más alta calidad desde 2020.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="WhatsApp">💬</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="tienda.html">Productos</a></li>
+                        <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Servicio al Cliente</h4>
+                    <ul>
+                        <li><a href="contactanos.html">Contacto</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <ul class="contact-info">
+                        <li>📞 (449) 123-4567</li>
+                        <li>✉️ info@lacolmena.com</li>
+                        <li>📍 Calle Principal #123</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/contactanos.js"></script>
+</body>
+</html>
