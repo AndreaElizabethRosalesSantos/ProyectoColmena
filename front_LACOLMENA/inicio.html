@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Colmena - Miel 100% Natural</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+<body>
+    
+    <div class="header-logo">
+        <img src="media/header.gif" alt="Logo de la tienda">
+    </div>
+
+   <nav class="section-bar">
+    <div class="left-sections">
+        <!-- Agrega class="active" a la página actual -->
+        <a href="inicio.html" class="active">INICIO</a>
+        <a href="tienda.html">TIENDA</a>
+        <a href="preguntas.html">PREGUNTAS FRECUENTES</a>
+        <a href="contactanos.html">CONTÁCTANOS</a>
+        <a href="nosotros.html">NOSOTROS</a>
+    </div>
+
+    <div class="right-icons">
+        <!-- Opcional: muestra el nombre de usuario si está logueado -->
+        <!-- <span class="username">👤 Usuario</span> -->
+        
+        <a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a>
+    </div>
+</nav>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <!-- CARRUSEL HERO PRINCIPAL -->
+        <section class="hero-carousel">
+            <div class="carousel-wrapper">
+                <div class="slide-track">
+                    <div class="slide slide-active">
+                        <img src="media/banner1.jpg" alt="Miel Natural">
+                        <div class="slide-content">
+                            <h1>Miel 100% Natural</h1>
+                            <p>Directo de la colmena a tu mesa</p>
+                            <a href="tienda.html" class="cta-button">Comprar Ahora</a>
+                        </div>
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="media/banner2.jpg" alt="Productos Premium">
+                        <div class="slide-content">
+                            <h1>Productos Premium</h1>
+                            <p>La mejor calidad garantizada</p>
+                            <a href="tienda.html" class="cta-button">Ver Catálogo</a>
+                        </div>
+                        <div class="slide-overlay"></div>
+                    </div>
+                    <div class="slide">
+                        <img src="media/banner3.jpg" alt="Envío Gratis">
+                        <div class="slide-content">
+                            <h1>Envío Gratis</h1>
+                            <p>En compras mayores a $500</p>
+                            <a href="tienda.html" class="cta-button">Aprovecha Ahora</a>
+                        </div>
+                        <div class="slide-overlay"></div>
+                    </div>
+                </div>
+                
+                <!-- Controles del carrusel -->
+                <button class="carousel-control prev" aria-label="Anterior">‹</button>
+                <button class="carousel-control next" aria-label="Siguiente">›</button>
+                
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agregar esta sección DESPUÉS del carrusel hero y ANTES de categorías -->
+
+<!-- SECCIÓN ¿QUIÉNES SOMOS? -->
+<section class="quienes-somos-section">
+    <div class="container">
+        <div class="quienes-somos-wrapper">
+            <!-- Lado izquierdo: Texto -->
+            <div class="quienes-texto-box">
+                <h2>¿QUIÉNES SOMOS?</h2>
+                <p>Somos una empresa familiar dedicada a la producción de miel 100% pura y natural. Con más de 15 años de experiencia en la apicultura, nos hemos comprometido a ofrecer productos de la más alta calidad.</p>
+                <p>Nuestro trabajo va más allá de la producción de miel; cuidamos cada detalle del proceso para garantizar que cada gota conserve todas sus propiedades naturales y beneficios para tu salud.</p>
+                <p>Trabajamos con pasión y dedicación, respetando el ciclo natural de las abejas y el medio ambiente. Creemos en la sostenibilidad y en ofrecer productos que mejoren tu vida de manera natural.</p>
+            </div>
+            
+            <!-- Lado derecho: Imagen -->
+            <div class="quienes-imagen-box">
+                <img src="media/quienes-somos.jpg" alt="Nuestra Historia">
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- CATEGORÍAS DESTACADAS -->
+        <section class="categories-section">
+            <div class="container">
+                <h2 class="section-title">Nuestras Categorías</h2>
+                <div class="categories-grid">
+                    <a href="tienda.html#miel-pura" class="category-card">
+                        <div class="category-image">
+                            <img src="media/cat-miel.jpg" alt="Miel Pura">
+                            <div class="category-overlay"></div>
+                        </div>
+                        <h3>Miel Pura</h3>
+                        <p>100% Natural y Orgánica</p>
+                    </a>
+                    <a href="tienda.html#derivados" class="category-card">
+                        <div class="category-image">
+                            <img src="media/cat-derivados.jpg" alt="Derivados">
+                            <div class="category-overlay"></div>
+                        </div>
+                        <h3>Derivados</h3>
+                        <p>Polen, Propóleo y más</p>
+                    </a>
+                    <a href="tienda.html#belleza" class="category-card">
+                        <div class="category-image">
+                            <img src="media/cat-belleza.jpg" alt="Belleza">
+                            <div class="category-overlay"></div>
+                        </div>
+                        <h3>Belleza</h3>
+                        <p>Cosméticos Naturales</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTOS MÁS VENDIDOS -->
+        <section class="bestsellers-section">
+            <div class="container">
+                <h2 class="section-title">Productos Más Vendidos</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-badge">Bestseller</div>
+                        <div class="product-image">
+                            <img src="media/producto1.jpg" alt="Miel Orgánica">
+                        </div>
+                        <div class="product-info">
+                            <h3>Miel Orgánica 500g</h3>
+                            <div class="product-rating">
+                                ⭐⭐⭐⭐⭐ <span>(127 reseñas)</span>
+                            </div>
+                            <p class="product-price">
+                                <span class="price-current">$180.00</span>
+                                <span class="price-old">$220.00</span>
+                            </p>
+                            <button class="add-to-cart">Agregar al Carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge sale">-20%</div>
+                        <div class="product-image">
+                            <img src="media/producto2.jpg" alt="Polen de Abeja">
+                        </div>
+                        <div class="product-info">
+                            <h3>Polen de Abeja 250g</h3>
+                            <div class="product-rating">
+                                ⭐⭐⭐⭐⭐ <span>(89 reseñas)</span>
+                            </div>
+                            <p class="product-price">
+                                <span class="price-current">$240.00</span>
+                                <span class="price-old">$300.00</span>
+                            </p>
+                            <button class="add-to-cart">Agregar al Carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge new">Nuevo</div>
+                        <div class="product-image">
+                            <img src="media/producto3.jpg" alt="Set de Belleza">
+                        </div>
+                        <div class="product-info">
+                            <h3>Set Belleza Natural</h3>
+                            <div class="product-rating">
+                                ⭐⭐⭐⭐⭐ <span>(54 reseñas)</span>
+                            </div>
+                            <p class="product-price">
+                                <span class="price-current">$450.00</span>
+                            </p>
+                            <button class="add-to-cart">Agregar al Carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="media/producto4.jpg" alt="Jalea Real">
+                        </div>
+                        <div class="product-info">
+                            <h3>Jalea Real Premium 200g</h3>
+                            <div class="product-rating">
+                                ⭐⭐⭐⭐⭐ <span>(98 reseñas)</span>
+                            </div>
+                            <p class="product-price">
+                                <span class="price-current">$380.00</span>
+                            </p>
+                            <button class="add-to-cart">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all-container">
+                    <a href="tienda.html" class="view-all-btn">Ver Todos los Productos →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CÓMO LO HACEMOS -->
+        <section class="process-section">
+            <div class="container">
+                <h2 class="section-title">Cómo lo Hacemos</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-icon">🐝</div>
+                        <h3>Recolección Natural</h3>
+                        <p>Nuestras abejas trabajan en ambientes 100% naturales y libres de químicos</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🍯</div>
+                        <h3>Extracción Artesanal</h3>
+                        <p>Proceso cuidadoso que preserva todas las propiedades de la miel</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✓</div>
+                        <h3>Control de Calidad</h3>
+                        <p>Cada lote es analizado para garantizar pureza y calidad</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">📦</div>
+                        <h3>Envasado Premium</h3>
+                        <p>Empaque seguro que mantiene la frescura del producto</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEWSLETTER -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>¡Suscríbete y Ahorra!</h2>
+                        <p>Recibe 10% de descuento en tu primera compra + ofertas exclusivas</p>
+                    </div>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>La Colmena</h4>
+                        <p>Miel 100% natural y productos derivados de la más alta calidad desde 2020.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook">📘</a>
+                            <a href="#" aria-label="Instagram">📷</a>
+                            <a href="#" aria-label="Twitter">🐦</a>
+                            <a href="#" aria-label="WhatsApp">💬</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Información</h4>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="tienda.html">Productos</a></li>
+                            <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Servicio al Cliente</h4>
+                        <ul>
+                            <li><a href="contactanos.html">Contacto</a></li>
+                            <li><a href="#">Envíos</a></li>
+                            <li><a href="#">Devoluciones</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <ul class="contact-info">
+                            <li>📞 (123) 456-7890</li>
+                            <li>✉️ info@lacolmena.com</li>
+                            <li>📍 Calle Principal #123</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    
