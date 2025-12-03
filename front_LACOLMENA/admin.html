@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA COLMENA</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/admin.css">
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <!-- Cargar Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <!--HEADER-->
+    <div class="header-logo">
+        <img src="media/header.gif" alt="Logo de la tienda">
+    </div>
+
+    <nav class="section-bar">
+        <div class="left-sections">
+            <a href="inicio.html">INICIO</a>
+            <a href="tienda.html">TIENDA</a>
+            <a href="preguntas.html">PREGUNTAS FRECUENTES</a>
+            <a href="contactanos.html">CONTACTANOS</a>
+            <a href="nosotros.html">NOSOTROS</a>
+        </div>
+
+        <div class="right-icons">
+            <a href="carrito.html" class="cart-icon">🛒</a>
+        </div>
+    </nav>
+
+    <!--CUERPO TIENDA-->
+    <div>
+        <!-- Sección de Alta -->
+        <section id="alta" class="seccion activa">
+            <h2>Alta Productos</h2>
+            <form id="formAlta" class="formulario">
+                <div class="form-group">
+                    <label for="altaCategoria">Categoría del producto:</label>
+                    <input type="text" id="altaCategoria" name="categoria" required placeholder="Ingrese la categoria del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaNombre">Nombre del producto:</label>
+                    <input type="text" id="altaNombre" name="nombre" required placeholder="Ingrese nombre del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaImagen">Nombre de la imagen:</label>
+                    <input type="text" id="altaImagen" name="imagen" required placeholder="Ingrese el nombre de la imagen del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaDescripcion">Descripción:</label>
+                    <input type="text" id="altaDescripcion" name="descripcion" required placeholder="Ingrese la descripcion del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaPrecio">Precio del producto:</label>
+                    <input type="text" id="altaPrecio" name="precio" required placeholder="Ingrese el precio del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaDisponibilidad">Inventario:</label>
+                    <input type="text" id="altaDisponibilidad" name="disponibilidad" required placeholder="Ingrese la disponibilidad del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaVentas">Ventas:</label>
+                    <input type="text" id="altaVentas" name="ventas" required placeholder="Ingrese las ventas del producto">
+                </div>
+                <div class="form-group">
+                    <label for="altaOfertas">Oferta:</label>
+                    <input type="text" id="altaOfertas" name="ofertas" required placeholder="Ingrese en oferta(1) o sin oferta(0)">
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+            <div id="mensajeAlta" class="mensaje"></div>
+        </section>
+
+        <!-- Sección de Cambio -->
+        <section id="cambio" class="seccion">
+            <h2>Actualizar Productos</h2>
+            <form id="formCambio" class="formulario">
+                <div class="form-group">
+                    <label for="cambioId">Id del producto:</label>
+                    <input type="number" id="cambioId" name="id" required placeholder="Ingrese el ID del producto a actualizar" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="cambioCategoria">Categoría del producto:</label>
+                    <input type="text" id="cambioCategoria" name="categoria" required placeholder="Ingrese la categoria del producto" >
+                </div>
+                <div class="form-group">
+                    <label for="cambioNombre">Nombre del producto:</label>
+                    <input type="text" id="cambioNombre" name="nombre" required placeholder="Ingrese el nombre del producto">
+                </div>
+                <div class="form-group">
+                    <label for="cambioImagen">Nombre de la imagen:</label>
+                    <input type="text" id="cambioImagen" name="imagen" required placeholder="Ingrese el nombre de la imagen del producto">
+                </div>
+                <div class="form-group">
+                    <label for="cambioDescripcion">Descripción del producto:</label>
+                    <input type="text" id="cambioDescripcion" name="descripcion" required placeholder="Ingrese la descripcion del producto">
+                </div>
+                <div class="form-group">
+                    <label for="cambioPrecio">Precio del producto:</label>
+                    <input type="text" id="cambioPrecio" name="precio" required placeholder="Ingrese el precio del producto">
+                </div>
+                <div class="form-group">
+                    <label for="cambioDisponibilidad">Inventario:</label>
+                    <input type="text" id="cambioDisponibilidad" name="disponibilidad" required placeholder="Ingrese la disponibilidad del producto">
+                </div>
+                <div class="form-group">
+                    <label for="cambioVentas">Ventas:</label>
+                    <input type="text" id="cambioVentas" name="ventas" required placeholder="Ingrese las ventas del producto">
+                </div>
+                <div class="form-group">
+                    <label for="cambioOfertas">Oferta:</label>
+                    <input type="text" id="cambioOfertas" name="ofertas" required placeholder="Ingrese en oferta(1) o sin oferta(0)">
+                </div>
+                <button type="submit" class="btn btn-warning">Actualizar Producto</button>
+            </form>
+            <div id="mensajeCambio" class="mensaje"></div>
+        </section>
+
+        <!-- Sección de Baja -->
+        <section id="baja" class="seccion">
+            <h2>Baja Productos</h2>
+            <form id="formBaja" class="formulario">
+                <div class="form-group">
+                    <label for="bajaId">Id del producto:</label>
+                    <input type="number" id="bajaId" name="id" required placeholder="Ingrese el ID del producto a eliminar" min="1">
+                </div>
+                <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+            </form>
+            <div id="mensajeBaja" class="mensaje"></div>
+        </section>
+
+
+        <!-- Modal General (Alta / Actualizar / Back) -->
+        <div id="modalGeneral" class="modal">
+            <div class="modal-content">
+                <div class="modal-header" id="modalHeader">
+                    <h3 id="modalTitulo"></h3>
+                </div>
+
+                <div class="modal-body">
+                    <p id="modalMensajeAccion"></p>
+
+                    <div id="modalInfo" class="modal-info">
+                        <p><strong>ID:</strong> <span id="mId"></span></p>
+                        <p><strong>Categoría:</strong> <span id="mCategoria"></span></p>
+                        <p><strong>Nombre:</strong> <span id="mNombre"></span></p>
+                        <p><strong>Imagen:</strong> <span id="mImagen"></span></p>
+                        <p><strong>Descripción:</strong> <span id="mDescripcion"></span></p>
+                        <p><strong>Precio:</strong> <span id="mPrecio"></span></p>
+                        <p><strong>Disponibilidad:</strong> <span id="mDisponibilidad"></span></p>
+                        <p><strong>Ventas:</strong> <span id="mVentas"></span></p>
+                        <p><strong>Ofertas:</strong> <span id="mOfertas"></span></p>
+                    </div>
+
+                    <p id="modalAdvertencia" class="advertencia" style="display:none;">
+                        Esta acción no se puede deshacer.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnCancelarGeneral" class="btn btn-cancelar">Cancelar</button>
+                    <button id="btnAceptarGeneral" class="btn btn-danger">Aceptar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Ventas Por Categorias -->
+        <section>
+            <h2>Ventas por Categoria</h2>
+
+            <div class="grafica-container">
+                <canvas id="ventasCategorias"></canvas>
+            </div>
+        </section>
+
+        <!-- Sección Ventas Total -->
+         <section>
+            <h2>Total de Ventas</h2>
+
+            <div class="ventas-container">
+                <div class="info-total">
+                    <span class="icono">💰</span>
+                    <p class="label">Total generado:</p>
+                    <p class="valor" id="totalVentas">$0.00</p>
+                </div>
+            </div>
+         </section>
+
+        <!-- Seccion Reporte de Inventario -->
+        <section>
+            <h2>Reporte de Inventario</h2>
+
+            <div id="contenedorInventario"></div>
+        </section>
+
+    </div>
+
+    <!--FOOTER-->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>La Colmena</h4>
+                        <p>Miel 100% natural y productos derivados de la más alta calidad desde 2020.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook">📘</a>
+                            <a href="#" aria-label="Instagram">📷</a>
+                            <a href="#" aria-label="Twitter">🐦</a>
+                            <a href="#" aria-label="WhatsApp">💬</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Información</h4>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="tienda.html">Productos</a></li>
+                            <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Servicio al Cliente</h4>
+                        <ul>
+                            <li><a href="contactanos.html">Contacto</a></li>
+                            <li><a href="#">Envíos</a></li>
+                            <li><a href="#">Devoluciones</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <ul class="contact-info">
+                            <li>📞 (123) 456-7890</li>
+                            <li>✉️ info@lacolmena.com</li>
+                            <li>📍 Calle Principal #123</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer> 
+        
+    <script src="js/admin.js"></script>
+</body>
+</html>
