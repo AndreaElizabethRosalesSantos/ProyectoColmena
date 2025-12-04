@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-//Rutas relacionadas con lo productos
+//Rutas relacionadas con los productos
 const {
     //ADMINITRADOR
     getProductos,           //mostrar productos

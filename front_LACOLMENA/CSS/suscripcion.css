@@ -1,0 +1,41 @@
+/* ============================================
+   ESTILOS ADICIONALES PARA SUSCRIPCIÓN
+   ============================================ */
+
+/* Efecto de carga en el botón */
+.newsletter-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: scale(0.98);
+}
+
+/* Animación del input al enfocar */
+.newsletter-form input:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 167, 38, 0.2);
+}
+
+/* Mensaje de validación personalizado */
+.newsletter-form input:invalid {
+    border: 2px solid #e74c3c;
+}
+
+.newsletter-form input:valid {
+    border: 2px solid #27ae60;
+}
+
+/* Efecto hover mejorado en el botón */
+.newsletter-form button:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 167, 38, 0.5);
+}
+
+/* Animación de envío exitoso */
+@keyframes success-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.newsletter-form.success {
+    animation: success-pulse 0.5s ease;
+}
