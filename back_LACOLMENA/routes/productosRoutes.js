@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-//Rutas relacionadas con lo productos
+//Rutas relacionadas con los productos
 const {
     //ADMINITRADOR
     getProductos,           //mostrar productos
@@ -14,7 +14,6 @@ const {
     getTotalVentas,         //suma las ventas totales 
     getDisponibilidad       //obtiene disponibilidad del producto
 } = require('../controllers/productosController');
-
 
 router.get('/', getProductos );
 router.get('/ventasCategoria', getVentasCategoria);

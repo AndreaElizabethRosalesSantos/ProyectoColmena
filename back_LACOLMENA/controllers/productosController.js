@@ -36,11 +36,12 @@ const postProducto = async (req, res) => {
   try { 
     console.log(req.body); 
     const {categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas } = req.body; 
-    if (!categoria || !nombre || !imagen || !descripcion || !precio || !disponibilidad || !ventas || !ofertas ) 
+    if (!categoria || !nombre || !imagen || !descripcion || !precio || !disponibilidad || !ventas || !ofertas )  
         return res.status(400).json({ mensaje: 'Faltan datos obligatorios' }); 
  
         const id_insertado = await productoModel.postProducto( categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas); 
-        res.status(201).json({ mensaje: 'Libro agregado', id_insertado }); 
+        res.status(201).json({ mensaje: 'Producto agregado', id_insertado }); 
+         
     } catch (error) { 
         console.error('Error al agregar el producto:', error); 
         res.status(500).json({ mensaje: 'Error al agregar el producto' }); 
@@ -71,7 +72,7 @@ const putProducto = async (req, res) => {
     const { id } = req.params; 
     const { categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas } = req.body; 
  
-    const filas = await productoModel.putProducto(id, categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas); 
+    const filas = await productoModel.putProducto(id, categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas ); 
     if (filas === 0) 
         return res.status(404).json({ mensaje: 'Producto no encontrado' }); 
     
@@ -108,6 +109,7 @@ const getTotalVentas = async (req, res) => {
 };
 
 // GET/api/productos/inventario
+//obtiene la disponibilidad de cada producto
 const getDisponibilidad = async (req, res) => {
     try {
         const datos = await productoModel.getDisponibilidad();
@@ -117,7 +119,6 @@ const getDisponibilidad = async (req, res) => {
         res.status(500).json({ mensaje: "Error al obtener inventario" });
     }
 };
-
 
 module.exports = {
     getProductos,
