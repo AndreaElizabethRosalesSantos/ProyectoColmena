@@ -1,4 +1,4 @@
-// controllers/productosController.js 
+// controllers/productosontroller.js 
 const productoModel = require('../model/productoModel'); 
  
 
@@ -35,12 +35,14 @@ const getProductoId = async (req, res) => {
 const postProducto = async (req, res) => { 
   try { 
     console.log(req.body); 
-    const {categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas } = req.body; 
-    if (!categoria || !nombre || !imagen || !descripcion || !precio || !disponibilidad || !ventas || !ofertas ) 
+    const {categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas } = req.body; 
+    if (!categoria || !nombre || !imagen || !descripcion || !precio || !disponibilidad || !ventas) 
         return res.status(400).json({ mensaje: 'Faltan datos obligatorios' }); 
  
-        const id_insertado = await productoModel.postProducto( categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas); 
+        console.log("1"); 
+        const id_insertado = await productoModel.postProducto( categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas); 
         res.status(201).json({ mensaje: 'Libro agregado', id_insertado }); 
+        console.log("2"); 
     } catch (error) { 
         console.error('Error al agregar el producto:', error); 
         res.status(500).json({ mensaje: 'Error al agregar el producto' }); 
@@ -64,14 +66,14 @@ const deleteProducto = async (req, res) => {
     } 
 }; 
 
-// PUT /api/productos/:id
+// PUT /api/books/:id
 //actualiza el producto 
 const putProducto = async (req, res) => { 
   try { 
     const { id } = req.params; 
-    const { categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas } = req.body; 
+    const { categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas } = req.body; 
  
-    const filas = await productoModel.putProducto(id, categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas); 
+    const filas = await productoModel.putProducto(id, categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas); 
     if (filas === 0) 
         return res.status(404).json({ mensaje: 'Producto no encontrado' }); 
     
@@ -83,49 +85,10 @@ const putProducto = async (req, res) => {
     } 
 }; 
 
-// GET/api/productos/ventasCategoria
-//obtiene la suma las ventas por categorias
-const getVentasCategoria = async (req, res) => {
-  try {
-    const ventas = await productoModel.getVentasCategoria();
-    res.json(ventas);
-  } catch (error) {
-    console.error("Error al obtener ventas por categoria:", error);
-    res.status(500).json({ mensaje: "Error al obtener ventas por categoria" });
-  }
-};
-
-// GET/api/productos/totalVentas
-//obtiene suma total de las ventas
-const getTotalVentas = async (req, res) => {
-  try {
-      const total = await productoModel.getTotalVentas();
-      res.json(total);
-  } catch (error) {
-      console.error("Error al obtener total de ventas:", error);
-      res.status(500).json({ mensaje: "Error al obtener total de ventas" });
-  }
-};
-
-// GET/api/productos/inventario
-const getDisponibilidad = async (req, res) => {
-    try {
-        const datos = await productoModel.getDisponibilidad();
-        res.json(datos);
-    } catch (error) {
-        console.error("Error al obtener inventario:", error);
-        res.status(500).json({ mensaje: "Error al obtener inventario" });
-    }
-};
-
-
 module.exports = {
     getProductos,
     getProductoId,
     postProducto,
     deleteProducto,
-    putProducto,
-    getVentasCategoria,
-    getTotalVentas,
-    getDisponibilidad
+    putProducto
 };

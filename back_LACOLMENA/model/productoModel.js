@@ -13,10 +13,10 @@ async function getProductoId(id) {
 }
 
 //insertar nuevo producto
-async function postProducto(categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas) {
+async function postProducto(categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas) {
     const [result] = await pool.query(
-        'INSERT INTO productos (categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)',
-        [categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas]
+        'INSERT INTO productos (categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas) VALUES ( ?, ?, ?, ?, ?, ?, ?)',
+        [categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas]
     );
     return result.insertId;
 }
@@ -28,43 +28,12 @@ async function deleteProducto(id) {
 }
 
 //actualizar libro existente
-async function putProducto(id, categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas) {
+async function putProducto(id, categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas) {
     const [result] = await pool.query(
-        'UPDATE productos SET categoria = ?, nombre = ?, imagen = ?, descripcion = ?, precio = ?, disponibilidad = ?, ventas = ?, ofertas = ? WHERE id = ?',
-        [categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, ofertas, id]
+        'UPDATE productos SET categoria = ?, nombre = ?, imagen = ?, descripcion = ?, precio = ?, disponibilidad = ?, ventas = ? WHERE id = ?',
+        [categoria, nombre, imagen, descripcion, precio, disponibilidad, ventas, id]
     );
     return result.affectedRows;
-}
-
-//obtener ventas por categoria
-async function getVentasCategoria() {
-    //ejecuta una consulta SQL, donde agrupa todos los productos por si categoria
-    const [rows] = await pool.query(`
-        SELECT categoria, SUM(ventas) AS total_vendido
-        FROM productos
-        GROUP BY categoria;
-    `);
-    //devuelve categoria: "Miel Pura", totalVentas:120
-    return rows;    
-}
-
-//obtener total de ventas
-async function getTotalVentas() {
-    const [rows] = await pool.query(`
-        SELECT SUM(ventas) AS totalVentas
-        FROM productos;
-    `);
-    return rows[0]; 
-}
-
-//obtiene la disponibilidad de cada producto
-async function getDisponibilidad() {
-    const [rows] = await pool.query(`
-        SELECT id, categoria, nombre, disponibilidad 
-        FROM productos
-        ORDER BY categoria, nombre;
-    `);
-    return rows;
 }
 
 module.exports = {
@@ -72,8 +41,5 @@ module.exports = {
     getProductoId,
     postProducto,
     deleteProducto,
-    putProducto,
-    getVentasCategoria,
-    getTotalVentas,
-    getDisponibilidad
+    putProducto
 };
