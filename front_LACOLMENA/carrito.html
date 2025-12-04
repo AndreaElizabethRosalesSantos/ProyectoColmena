@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/carrito.css">
+    <title>Carrito - LA COLMENA</title>
+</head>
+<body>
+    <h1>🛒 Carrito de Compras</h1>
+    <a href="tienda.html">← Volver a la tienda</a>
+    
+    <div id="carrito-vacio" style="text-align: center; padding: 40px;">
+        <h3>Tu carrito está vacío</h3>
+        <a href="tienda.html"><button>Ir a comprar</button></a>
+    </div>
+    
+    <div id="carrito-contenido" style="display: none;">
+        <div id="items-carrito"></div>
+        
+        <div class="resumen">
+            <h3>Resumen</h3>
+            <p>Subtotal: $<span id="subtotal">0</span></p>
+            <p>Impuestos: $<span id="impuestos">0</span></p>
+            <p>Envío: $<span id="envio">0</span></p>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+            
+            <div style="margin-top: 20px;">
+                <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+                <button onclick="crearOrden()" style="background: #4CAF50; color: white;">Comprar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/carrito.js"></script>
+</body>
+</html>
