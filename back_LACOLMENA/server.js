@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const pool = require('./db/conexion'); // <-- Importamos la conexión
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,14 +13,17 @@ app.use(express.json());
 //RUTAS
 const productosRoutes = require('./routes/productosRoutes');
 const carritoRoutes = require('./routes/carritoRoutes');
+const cuponRoutes = require('./routes/cuponRoutes');
 
 app.use('/api/productos', productosRoutes);
 app.use('/api/carrito', carritoRoutes);
+app.use('/api/cupones', cuponRoutes);
+
 
 // Ruta base
-app.get('/', (req, res) => {
-    res.send(' API la_colmena funcionando correctamente');
-});
+app.get('/', (req, res) =>{
+    res.sendFile(path.join(__dirname, 'front_LACOLMENA', 'index.html'));
+})
 
 // Funcion que hace una consulta de prueba mínima que
 // confirma que todo el circuito conexión → consulta → respuesta está funcionando
@@ -47,9 +51,12 @@ async function testConnection() {
         console.log(' Conexión a la base de datos establecida. Resultado:', rows[0].result);
         
         // Verificar tablas necesarias
-        const [tables] = await pool.query(`
-            SHOW TABLES LIKE 'productos'
-        `);
+        const [tables] = await pool.query(`SHOW TABLES LIKE 'cupones'`);
+        if (tables.length > 0) {
+            console.log('Tabla de cupones encontrada');
+        } else {
+            console.log('Tabla de cupones no encontrada. Ejecuta el script SQL.');
+        }
         
     } catch (error) {
         console.error(' Error al conectar con la base de datos:', error.message);

@@ -22,8 +22,31 @@
             <h3>Resumen</h3>
             <p>Subtotal: $<span id="subtotal">0</span></p>
             <p>Impuestos: $<span id="impuestos">0</span></p>
+            <p id="linea-descuento" class="linea-descuento" style="display: none;">
+                Descuento: -$<span id="descuento">0</span>
+            </p>
             <p>Envío: $<span id="envio">0</span></p>
             <p><strong>Total: $<span id="total">0</span></strong></p>
+
+            <div class="seccion-cupon">
+                <h3>¿Tienes un cupón de descuento?</h3>
+                <div class="contenedor-cupon">
+                    <input 
+                        type="text" 
+                        id="input-cupon" 
+                        placeholder="Ej: DESCUENTO10"
+                        maxlength="20"
+                        oninput="validarInputCupon(this)"
+                    >
+                    <button id="btn-aplicar-cupon" class="btn-cupon" onclick="aplicarCupon()">
+                        Aplicar
+                    </button>
+                    <button id="btn-quitar-cupon" class="btn-cupon" onclick="quitarCupon()">
+                        Quitar
+                    </button>
+                </div>
+                <p id="mensaje-cupon" class="mensaje-cupon"></p>
+            </div>
             
             <div style="margin-top: 20px;">
                 <button onclick="vaciarCarrito()">Vaciar Carrito</button>
@@ -33,5 +56,27 @@
     </div>
 
     <script src="js/carrito.js"></script>
+    <script>
+        // Mostrar/ocultar línea de descuento automáticamente
+        const observer = new MutationObserver(() => {
+            const descuento = document.getElementById('descuento');
+            const lineaDescuento = document.getElementById('linea-descuento');
+            
+            if (descuento && lineaDescuento) {
+                const valor = parseFloat(descuento.textContent);
+                lineaDescuento.style.display = (valor > 0) ? 'block' : 'none';
+            }
+        });
+        
+        // Observar cambios en el elemento de descuento
+        const descuentoElement = document.getElementById('descuento');
+        if (descuentoElement) {
+            observer.observe(descuentoElement, { 
+                characterData: true, 
+                childList: true, 
+                subtree: true 
+            });
+        }
+    </script>
 </body>
 </html>

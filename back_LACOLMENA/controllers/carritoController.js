@@ -1,4 +1,4 @@
-// controllers/carritoController.js
+// controllers/carritoController.js - VERSION SIMPLIFICADA SIN CUPONES EN OBTENER
 const carritoModel = require('../model/carritoModel');
 const productoModel = require('../model/productoModel');
 
@@ -13,25 +13,21 @@ const agregarAlCarrito = async (req, res) => {
             });
         }
 
-        // Verificar si el producto existe
         const producto = await productoModel.getProductoId(productoId);
         if (!producto) {
             return res.status(404).json({ mensaje: 'Producto no encontrado' });
         }
 
-        // Verificar disponibilidad
         if (producto.disponibilidad < cantidad) {
             return res.status(400).json({ 
                 mensaje: `Solo hay ${producto.disponibilidad} unidades disponibles` 
             });
         }
 
-        // Verificar si ya está en el carrito
         const existe = await carritoModel.productoEnCarrito(usuarioId, productoId);
         let itemId;
         
         if (existe) {
-            // Actualizar cantidad si ya existe
             const nuevaCantidad = existe.cantidad + cantidad;
             if (producto.disponibilidad < nuevaCantidad) {
                 return res.status(400).json({ 
@@ -41,7 +37,6 @@ const agregarAlCarrito = async (req, res) => {
             await carritoModel.actualizarCantidadCarrito(existe.id, nuevaCantidad);
             itemId = existe.id;
         } else {
-            // Agregar nuevo item
             itemId = await carritoModel.agregarItemCarrito(usuarioId, productoId, cantidad);
         }
         
@@ -56,7 +51,7 @@ const agregarAlCarrito = async (req, res) => {
     }
 };
 
-// API – Obtener el carrito del usuario
+// API – Obtener el carrito del usuario (SIN CUPONES AUTOMÁTICOS)
 const obtenerCarrito = async (req, res) => {
     try {
         const { usuarioId } = req.params;
@@ -67,7 +62,6 @@ const obtenerCarrito = async (req, res) => {
 
         const carrito = await carritoModel.obtenerCarritoUsuario(usuarioId);
         
-        // Calcular subtotal por item y total general
         let subtotal = 0;
         const carritoConSubtotal = carrito.map(item => {
             const itemSubtotal = item.precio * item.cantidad;
@@ -78,7 +72,7 @@ const obtenerCarrito = async (req, res) => {
             };
         });
 
-        // Calcular impuestos (SIN ENVÍO)
+        // Calcular impuestos (sin descuento por ahora)
         const impuestos = subtotal * 0.16;
         const total = subtotal + impuestos;
 
@@ -88,6 +82,7 @@ const obtenerCarrito = async (req, res) => {
                 totalItems: carrito.length,
                 subtotal: parseFloat(subtotal.toFixed(2)),
                 impuestos: parseFloat(impuestos.toFixed(2)),
+                descuento: 0,
                 total: parseFloat(total.toFixed(2))
             }
         });
@@ -109,7 +104,6 @@ const actualizarCantidad = async (req, res) => {
             });
         }
 
-        // Obtener el item para verificar disponibilidad
         const pool = require('../db/conexion');
         const [items] = await pool.query(`
             SELECT c.*, p.disponibilidad 
@@ -124,7 +118,6 @@ const actualizarCantidad = async (req, res) => {
 
         const item = items[0];
         
-        // Verificar disponibilidad
         if (item.disponibilidad < cantidad) {
             return res.status(400).json({ 
                 mensaje: `Solo hay ${item.disponibilidad} unidades disponibles` 
@@ -186,7 +179,7 @@ const vaciarCarrito = async (req, res) => {
     }
 };
 
-// API – Calcular totales, impuestos y envío
+// API – Calcular totales (SIN CUPONES AUTOMÁTICOS)
 const calcularTotales = async (req, res) => {
     try {
         const { usuarioId } = req.params;
@@ -201,26 +194,24 @@ const calcularTotales = async (req, res) => {
             return res.json({
                 subtotal: 0,
                 impuestos: 0,
+                descuento: 0,
                 total: 0,
                 mensaje: 'Carrito vacío'
             });
         }
 
-        // Calcular subtotal
         let subtotal = 0;
         carrito.forEach(item => {
             subtotal += item.precio * item.cantidad;
         });
 
-        // Calcular impuestos (16% IVA)
         const impuestos = subtotal * 0.16;
-        
-        // Total general (SIN ENVÍO)
         const total = subtotal + impuestos;
 
         res.json({
             subtotal: parseFloat(subtotal.toFixed(2)),
             impuestos: parseFloat(impuestos.toFixed(2)),
+            descuento: 0,
             total: parseFloat(total.toFixed(2)),
             itemsCount: carrito.length
         });
@@ -239,7 +230,6 @@ const obtenerOrdenes = async (req, res) => {
             return res.status(400).json({ mensaje: 'usuarioId es requerido' });
         }
 
-        // Verificar que usuario exista
         const pool = require('../db/conexion');
         const [usuarios] = await pool.query(
             'SELECT id FROM users WHERE id = ?',
@@ -252,7 +242,6 @@ const obtenerOrdenes = async (req, res) => {
 
         const ordenes = await carritoModel.obtenerOrdenesUsuario(usuarioId);
         
-        // Obtener detalles de cada orden
         const ordenesConDetalles = await Promise.all(
             ordenes.map(async (orden) => {
                 const [detalles] = await pool.query(`
@@ -279,18 +268,19 @@ const obtenerOrdenes = async (req, res) => {
     }
 };
 
+// API – Crear orden (CON SOPORTE PARA CUPONES)
 const crearOrden = async (req, res) => {
     const pool = require('../db/conexion');
     let connection;
     
     try {
         const { usuarioId } = req.params;
+        const { codigoCupon } = req.body; // Código de cupón opcional
         
         if (!usuarioId) {
             return res.status(400).json({ mensaje: 'usuarioId es requerido' });
         }
 
-        // 1. Obtener información del usuario
         const [usuarios] = await pool.query(
             'SELECT * FROM users WHERE id = ?',
             [usuarioId]
@@ -302,30 +292,45 @@ const crearOrden = async (req, res) => {
         
         const usuario = usuarios[0];
 
-        // 2. Obtener carrito del usuario
         const itemsCarrito = await carritoModel.obtenerItemsParaOrden(usuarioId);
         
         if (itemsCarrito.length === 0) {
             return res.status(400).json({ mensaje: 'Carrito vacío' });
         }
 
-        // 3. Calcular totales (SIN ENVÍO)
+        // Calcular subtotal
         let subtotal = 0;
         itemsCarrito.forEach(item => {
             subtotal += item.precio * item.cantidad;
         });
         
         const impuestos = subtotal * 0.16;
-        const total = subtotal + impuestos;
+        
+        // Validar cupón si se proporcionó
+        let descuento = 0;
+        let cuponAplicado = null;
+        
+        if (codigoCupon) {
+            const cuponModel = require('../model/cuponModel');
+            const cupon = await cuponModel.validarCupon(codigoCupon.trim().toUpperCase());
+            if (cupon) {
+                descuento = subtotal * (cupon.descuento / 100);
+                cuponAplicado = {
+                    codigo: cupon.codigo,
+                    porcentaje: cupon.descuento,
+                    monto: descuento
+                };
+            }
+        }
+        
+        const total = subtotal + impuestos - descuento;
 
-        // 4. Iniciar transacción
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
         try {
-            // 5. Verificar inventario y descontar
+            // Verificar inventario
             for (const item of itemsCarrito) {
-                // Verificar disponibilidad con bloqueo de fila
                 const [producto] = await connection.query(
                     'SELECT disponibilidad FROM productos WHERE id = ? FOR UPDATE',
                     [item.producto_id]
@@ -339,18 +344,13 @@ const crearOrden = async (req, res) => {
                     throw new Error(`Producto "${item.nombre}" sin suficiente inventario. Disponible: ${producto[0].disponibilidad}, Solicitado: ${item.cantidad}`);
                 }
                 
-                // Descontar inventario
-                const [updateResult] = await connection.query(
+                await connection.query(
                     'UPDATE productos SET disponibilidad = disponibilidad - ?, ventas = ventas + ? WHERE id = ?',
                     [item.cantidad, item.cantidad, item.producto_id]
                 );
-                
-                if (updateResult.affectedRows === 0) {
-                    throw new Error(`Error al actualizar inventario del producto ${item.producto_id}`);
-                }
             }
 
-            // 6. Crear la orden en la BD (SIN estado, creado_en, envio)
+            // Crear la orden
             const [ordenResult] = await connection.query(
                 'INSERT INTO ordenes (usuario_id, total, impuestos) VALUES (?, ?, ?)',
                 [usuarioId, total, impuestos]
@@ -358,7 +358,7 @@ const crearOrden = async (req, res) => {
             
             const ordenId = ordenResult.insertId;
 
-            // 7. Crear detalles de la orden
+            // Crear detalles de la orden
             for (const item of itemsCarrito) {
                 await connection.query(
                     'INSERT INTO orden_detalles (orden_id, producto_id, cantidad, precio_unitario) VALUES (?, ?, ?, ?)',
@@ -366,16 +366,14 @@ const crearOrden = async (req, res) => {
                 );
             }
 
-            // 8. Vaciar el carrito
+            // Vaciar el carrito
             await connection.query(
                 'DELETE FROM carrito WHERE usuario_id = ?',
                 [usuarioId]
             );
 
-            // 9. Commit de la transacción
             await connection.commit();
 
-            // 10. Obtener información completa de la orden creada
             const [ordenCreada] = await connection.query(
                 'SELECT * FROM ordenes WHERE id = ?',
                 [ordenId]
@@ -389,14 +387,16 @@ const crearOrden = async (req, res) => {
                 [ordenId]
             );
 
-            // 11. Responder con éxito
             res.status(201).json({
                 mensaje: 'Orden creada exitosamente',
                 orden: {
                     id: ordenId,
                     usuario_id: usuarioId,
-                    total: total,
+                    subtotal: subtotal,
                     impuestos: impuestos,
+                    descuento: descuento,
+                    total: total,
+                    cupon: cuponAplicado,
                     detalles: detallesOrden.map(detalle => ({
                         producto_id: detalle.producto_id,
                         nombre: detalle.nombre,
@@ -413,7 +413,6 @@ const crearOrden = async (req, res) => {
             });
 
         } catch (error) {
-            // Rollback en caso de error
             if (connection) {
                 await connection.rollback();
             }
@@ -423,7 +422,6 @@ const crearOrden = async (req, res) => {
     } catch (error) {
         console.error('Error al crear orden:', error);
         
-        // Error específico por inventario insuficiente
         if (error.message.includes('inventario')) {
             return res.status(400).json({ 
                 mensaje: 'Error de inventario',
