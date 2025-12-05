@@ -15,6 +15,8 @@ body {
     background-color: #fafafa;
     color: #2c2c2c;
     line-height: 1.6;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 /* ============================================

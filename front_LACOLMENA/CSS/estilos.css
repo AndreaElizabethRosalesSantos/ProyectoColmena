@@ -1,4 +1,4 @@
-/*************************************************************************************/
+ /*************************************************************************************/
 /*                    ESTILOS PARA PÁGINA DE INICIO - LA COLMENA                     */
 /*************************************************************************************/
 
@@ -14,6 +14,8 @@ body {
     background-color: #fafafa;
     color: #2c2c2c;
     line-height: 1.6;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 /*************************************************************************************/
@@ -173,10 +175,25 @@ body {
     box-shadow: 0 8px 24px rgba(255, 167, 38, 0.45);
     border-color: #F7931E;
 }
+/* ============================================
+   CONTADOR DEL CARRITO DINÁMICO
+   ============================================ */
+.cart-icon {
+    position: relative;
+    font-size: 24px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
 
-/* Badge de cantidad en el carrito */
-.cart-icon::after {
-    content: '3';
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Este es el contador que JavaScript actualiza */
+.cart-count {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -184,7 +201,7 @@ body {
     color: white;
     font-size: 12px;
     font-weight: 700;
-    width: 24px;
+    min-width: 24px;
     height: 24px;
     border-radius: 50%;
     display: flex;
@@ -192,30 +209,118 @@ body {
     justify-content: center;
     box-shadow: 0 3px 10px rgba(231, 76, 60, 0.5);
     border: 2.5px solid white;
-    animation: pulse 2s infinite;
+    padding: 0 4px;
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.cart-count.pulse {
+    animation: pulse 0.5s ease;
+}
 /* Animación del badge */
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
 }
 
+
 /*************************************************************************************/
 /*                           CARRUSEL HERO PRINCIPAL                                 */
 /*************************************************************************************/
 .hero-carousel {
     width: 100%;
-    height: 600px;
-    position: relative;
-    overflow: hidden;
-    background-color: #000;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 40px 0;
 }
 
 .carousel-wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Columna de texto */
+.text-column {
+    flex: 1;
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    min-width: 400px;
+}
+
+.text-track {
+    position: relative;
+    height: 100%;
+}
+
+.text-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    padding-right: 20px;
+}
+
+.text-slide.text-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.text-slide h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #FFA726 0%, #F57C00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-slide p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Columna de imágenes */
+.image-column {
+    flex: 1.2;
     position: relative;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    min-width: 500px;
 }
 
 .slide-track {
@@ -229,11 +334,13 @@ body {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 0.8s ease, transform 1.2s ease;
+    transform: scale(0.95);
 }
 
 .slide.slide-active {
     opacity: 1;
+    transform: scale(1);
     z-index: 1;
 }
 
@@ -241,47 +348,10 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 20px;
 }
 
-.slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0.1) 100%
-    );
-    z-index: 1;
-}
-
-.slide-content {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translateY(-50%);
-    z-index: 2;
-    color: white;
-    max-width: 600px;
-}
-
-.slide-content h1 {
-    font-size: 56px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-    line-height: 1.2;
-}
-
-.slide-content p {
-    font-size: 24px;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-}
-
+/* Controles comunes */
 .cta-button {
     display: inline-block;
     padding: 15px 40px;
@@ -293,6 +363,8 @@ body {
     border-radius: 50px;
     box-shadow: 0 8px 20px rgba(247, 147, 30, 0.4);
     transition: all 0.3s ease;
+    align-self: flex-start;
+    margin-top: 10px;
 }
 
 .cta-button:hover {
@@ -301,7 +373,7 @@ body {
     box-shadow: 0 12px 30px rgba(72, 54, 37, 0.5);
 }
 
-/* Controles del Carrusel */
+/* Controles del carrusel */
 .carousel-control {
     position: absolute;
     top: 50%;
@@ -309,9 +381,9 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     color: #483625;
     border: none;
-    width: 60px;
-    height: 60px;
-    font-size: 36px;
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
     cursor: pointer;
     z-index: 10;
     border-radius: 50%;
@@ -326,17 +398,17 @@ body {
 }
 
 .carousel-control.prev {
-    left: 30px;
+    left: 20px;
 }
 
 .carousel-control.next {
-    right: 30px;
+    right: 20px;
 }
 
-/* Indicadores del Carrusel */
+/* Indicadores del carrusel */
 .carousel-indicators {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -345,8 +417,8 @@ body {
 }
 
 .indicator {
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     cursor: pointer;
@@ -356,8 +428,7 @@ body {
 
 .indicator.active {
     background-color: #FFA726;
-    width: 40px;
-    border-radius: 10px;
+    transform: scale(1.3);
     border-color: white;
 }
 
@@ -581,7 +652,7 @@ body {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
