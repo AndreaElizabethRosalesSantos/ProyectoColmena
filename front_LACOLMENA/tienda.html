@@ -6,10 +6,10 @@
     <title>LA COLMENA</title>
     <link rel="stylesheet" href="CSS/estilos.css">
     <link rel="stylesheet" href="CSS/tienda.css">
+    <link rel="stylesheet" href="CSS/login.css">
     <link rel="icon" type="image/png" href="media/favicon.png">
 </head>
 <body>
-    <!--HEADER-->
     <div class="header-logo">
         <img src="media/header.gif" alt="Logo de la tienda">
     </div>
@@ -19,14 +19,140 @@
             <a href="inicio.html">INICIO</a>
             <a href="tienda.html" class="active">TIENDA</a>
             <a href="preguntas.html">PREGUNTAS FRECUENTES</a>
-            <a href="contactanos.html">CONTACTANOS</a>
+            <a href="contactanos.html">CONTÁCTANOS</a>
             <a href="nosotros.html">NOSOTROS</a>
         </div>
 
         <div class="right-icons">
-            <a href="carrito.html" class="cart-icon">🛒</a>
+            <button class="login-btn" id="showLoginBtn">Iniciar Sesión</button>
+            
+            <div class="user-section" id="userSection">
+                <span class="username-display">👤 <span id="usernameDisplay"></span></span>
+                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+            
+            <a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a>
         </div>
     </nav>
+
+    <!--LOGIN -->
+    <div class="auth-container" id="loginModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email o Usuario</label>
+                    <input type="text" id="loginEmail" name="email" required>
+                    <span class="error-message" id="loginEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <span class="error-message" id="loginPasswordError"></span>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="captcha-container">
+                    <div class="captcha-image" id="captchaContainer">
+                        <img id="captchaImage" src="" alt="CAPTCHA">
+                    </div>
+                    <button type="button" class="captcha-reload" onclick="loadCaptcha()">🔄 Nuevo Captcha</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="captchaInput">Ingresa el texto del CAPTCHA</label>
+                    <input type="text" id="captchaInput" name="captcha" required autocomplete="off">
+                    <span class="error-message" id="captchaError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Iniciar Sesión</button>
+
+                <div class="auth-links">
+                    <a onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
+                    <span class="separator">|</span>
+                    <a onclick="showRegister()">Crear cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE REGISTRO -->
+    <div class="auth-container" id="registerModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Nombre Completo</label>
+                    <input type="text" id="regName" name="name" required>
+                    <span class="error-message" id="regNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" required>
+                    <span class="error-message" id="regEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regUsername">Usuario</label>
+                    <input type="text" id="regUsername" name="username" required>
+                    <span class="error-message" id="regUsernameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPhone">Teléfono</label>
+                    <input type="tel" id="regPhone" name="phone" required>
+                    <span class="error-message" id="regPhoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Contraseña</label>
+                    <input type="password" id="regPassword" name="password" required>
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <span class="error-message" id="regPasswordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPasswordConfirm">Confirmar Contraseña</label>
+                    <input type="password" id="regPasswordConfirm" name="passwordConfirm" required>
+                    <span class="error-message" id="regPasswordConfirmError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Registrarse</button>
+
+                <div class="auth-links">
+                    <a onclick="showLogin()">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE RECUPERAR CONTRASEÑA -->
+    <div class="auth-container" id="forgotPasswordModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Recuperar Contraseña</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                Ingresa tu email y te enviaremos instrucciones para restablecer tu contraseña.
+            </p>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="forgotEmail">Email</label>
+                    <input type="email" id="forgotEmail" name="email" required>
+                    <span class="error-message" id="forgotEmailError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Enviar Instrucciones</button>
+
+                <div class="auth-links">
+                    <a onclick="showLogin()">Volver al inicio de sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!--CUERPO TIENDA-->
     <h2>Productos</h2>
@@ -94,10 +220,12 @@
                 </div>
                 <div class="footer-bottom">
                     <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+                    <p>ESTA PAGINA ES UN PROYECTO ACADEMICO DE LA UNIVERSIDAD AUTONOMA DE AGUASCALIENTES</p>
                 </div>
             </div>
         </footer> 
         
     <script src="js/tienda.js"></script>
+    <script src="js/auth.js"></script>    
 </body>
 </html>

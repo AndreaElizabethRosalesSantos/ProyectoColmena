@@ -14,6 +14,8 @@ body {
     background-color: #fafafa;
     color: #2c2c2c;
     line-height: 1.6;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 /* ============================================
@@ -25,6 +27,7 @@ body {
     padding: 60px 20px;
     text-align: center;
     position: relative;
+    max-width: 100vw; /* Asegura que no exceda el ancho de la ventana */
 }
 
 /* ============================================
@@ -32,7 +35,7 @@ body {
    ============================================ */
 
 .nosotros-header {
-    max-width: 1150px;
+    max-width: 900px;
     margin: 0 auto 60px;
     padding: 50px 40px;
     background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
@@ -108,6 +111,7 @@ body {
 
 .instructor {
     flex: 0 0 280px;
+    max-width: 100%; /* Asegura que no exceda el contenedor */
 }
 
 /* ============================================
@@ -203,8 +207,8 @@ body {
 }
 
 .icono-red {
-    width: 40px;
-    height: 40px;
+    width: 4px;
+    height: 4px;
     transition: all 0.3s ease;
     filter: grayscale(0);
     border-radius: 8px;
@@ -287,6 +291,8 @@ body {
     .nosotros-header {
         padding: 40px 28px;
         margin-bottom: 40px;
+        margin-left: 16px;
+        margin-right: 16px;
     }
     
     #nosotros h2 {
@@ -304,6 +310,7 @@ body {
     
     .instructores {
         gap: 25px;
+        padding: 0 16px;
     }
     
     .instructor {
@@ -331,6 +338,7 @@ body {
         grid-template-columns: 1fr;
         gap: 25px;
         margin-top: 50px;
+        padding: 0 16px;
     }
     
     .mision-card,
@@ -340,8 +348,14 @@ body {
 }
 
 @media (max-width: 480px) {
+    #nosotros {
+        padding: 40px 12px;
+    }
+    
     .nosotros-header {
         padding: 30px 20px;
+        margin-left: 12px;
+        margin-right: 12px;
     }
     
     #nosotros h2 {
@@ -359,11 +373,13 @@ body {
     
     .instructores {
         gap: 20px;
+        padding: 0 12px;
     }
     
     .instructor {
         flex: 0 0 100%;
-        max-width: 350px;
+        max-width: 100%;
+        padding: 30px 20px;
     }
     
     .instructor-image {
@@ -376,6 +392,10 @@ body {
         height: 35px;
     }
     
+    .mision-vision {
+        padding: 0 12px;
+    }
+    
     .card-icon {
         font-size: 40px;
     }
@@ -383,6 +403,11 @@ body {
     .mision-card h3,
     .vision-card h3 {
         font-size: 20px;
+    }
+    
+    .mision-card,
+    .vision-card {
+        padding: 25px 20px;
     }
 }
 

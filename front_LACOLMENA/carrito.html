@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/carrito.css">
+    <title>Carrito - LA COLMENA</title>
+</head>
+<body>
+
+    <!-- ABEJAS EN MOVIMIENTO -->
+    <div class="abeja abeja1">🐝</div>
+    <div class="abeja abeja2">🐝</div>
+    <div class="abeja abeja3">🐝</div>
+    <div class="abeja abeja4">🐝</div>
+    <div class="abeja abeja5">🐝</div>
+
+    <!-- TÍTULO TIPO COLMENA -->
+    <h1 class="titulo-carrito">
+          🛒 CARRITO DE COMPRAS  
+       <span class="subtitulo-colmena">LA COLMENA</span>
+</h1>
+
+
+    <!-- BOTÓN REGRESAR -->
+    <a href="tienda.html" class="regresar-carrito">⬅ Volver a la tienda</a>
+    
+    <!-- CARRITO VACÍO -->
+    <div id="carrito-vacio" class="colmena-marco">
+        <h3>Tu carrito está vacío 🍯</h3>
+        <a href="tienda.html" class="btn-ir-comprar">Ir a comprar 🍯</a>
+    </div>
+    
+    <!-- CARRITO CON PRODUCTOS -->
+    <div id="carrito-contenido" style="display: none;">
+        <div id="items-carrito"></div>
+        
+        <div class="resumen colmena-marco">
+            <h3>Resumen de compra</h3>
+
+            <p>Subtotal: <span id="subtotal">$0</span></p>
+            <p>Impuestos: <span id="impuestos">$0</span></p>
+            <p>Envío: <span id="envio">$0</span></p>
+            <p><strong>Total: <span id="total">$0</span></strong></p>
+            
+            <div style="margin-top: 20px;" class="botones-carrito">
+                 <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
+                 <button class="btn-comprar" onclick="crearOrden()">Comprar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GOTAS DE MIEL ANIMADAS -->
+    <div class="gota-miel gota1"></div>
+    <div class="gota-miel gota2"></div>
+    <div class="gota-miel gota3"></div>
+
+    <script src="js/carrito.js"></script>
+</body>
+</html>
