@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA COLMENA</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/nosotros.css">
+            <link rel="stylesheet" href="CSS/login.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="CSS/accsNos.css">
+</head>
+<body>
+    
+   <div class="header-logo">
+        <img src="media/header.gif" alt="Logo de la tienda">
+    </div>
+
+    <nav class="section-bar">
+        <div class="left-sections">
+            <a href="inicio.html">INICIO</a>
+            <a href="tienda.html">TIENDA</a>
+            <a href="preguntas.html">PREGUNTAS FRECUENTES</a>
+            <a href="contactanos.html">CONTÁCTANOS</a>
+            <a href="nosotros.html" class="active">NOSOTROS</a>
+        </div>
+
+        <div class="right-icons">
+            <div class="user-section" id="userSection">
+                <span class="username-display">👤 <span id="usernameDisplay"></span></span>
+                <button class="logout-btn" id="logoutBtn" title="Cerrar sesión">🚪</button>
+            </div>
+        
+        <button class="login-btn" id="showLoginBtn" title="Iniciar sesión">🔐</button>
+        
+        <a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a>
+        </div>
+    </nav>
+<!-- Botón flotante -->
+    <button class="accessibility-btn" id="openPanel">♿</button>
+
+    <!-- Panel lateral flotante -->
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            <h2>Accesibilidad</h2>
+            <span id="closePanel" class="close-x">×</span>
+        </div>
+
+        <h3>Modo de Contraste</h3>
+        <div class="contrast-options">
+            <button class="contrast-btn active" id="lightMode">
+                <span>☀️</span> Claro
+            </button>
+            <button class="contrast-btn" id="darkMode">
+                <span>🌙</span> Oscuro
+            </button>
+        </div>
+
+        <h3>Tamaño de Texto</h3>
+        <div class="text-size-box">
+            <div class="size-display">
+                <span class="percentage" id="textPercent">100%</span>
+                <span class="pixels" id="pixelSize">16px</span>
+            </div>
+            
+            <input type="range" 
+                class="text-slider" 
+                id="textSlider" 
+                min="80" 
+                max="150" 
+                value="100" 
+                step="10">
+            
+            <div class="slider-labels">
+                <span>Pequeño</span>
+                <span>Grande</span>
+            </div>
+            
+            <div class="size-buttons">
+                <button class="size-btn" id="sizeSmall">Pequeño</button>
+                <button class="size-btn active" id="sizeNormal">Normal</button>
+                <button class="size-btn" id="sizeGrande">Grande</button>
+            </div>
+        </div>
+
+        <button class="reset-btn" id="resetAll">
+            <span>🔄</span> Restaurar
+        </button>
+    </div>
+    <!--LOGIN -->
+    <div class="auth-container" id="loginModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email o Usuario</label>
+                    <input type="text" id="loginEmail" name="email" required>
+                    <span class="error-message" id="loginEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <span class="error-message" id="loginPasswordError"></span>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="captcha-container">
+                    <div class="captcha-image" id="captchaContainer">
+                        <img id="captchaImage" src="" alt="CAPTCHA">
+                    </div>
+                        <button type="button" class="captcha-reload" onclick="generarCaptcha()">🔄 Nuevo Captcha</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="captchaInput">Ingresa el texto del CAPTCHA</label>
+                    <input type="text" id="captchaInput" name="captcha" required autocomplete="off">
+                    <span class="error-message" id="captchaError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Iniciar Sesión</button>
+
+                <div class="auth-links">
+                    <a onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
+                    <span class="separator">|</span>
+                    <a onclick="showRegister()">Crear cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE REGISTRO -->
+    <div class="auth-container" id="registerModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Nombre Completo</label>
+                    <input type="text" id="regName" name="name" required>
+                    <span class="error-message" id="regNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" required>
+                    <span class="error-message" id="regEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regUsername">Usuario</label>
+                    <input type="text" id="regUsername" name="username" required>
+                    <span class="error-message" id="regUsernameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPhone">Teléfono</label>
+                    <input type="tel" id="regPhone" name="phone" required>
+                    <span class="error-message" id="regPhoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Contraseña</label>
+                    <input type="password" id="regPassword" name="password" required>
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <span class="error-message" id="regPasswordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPasswordConfirm">Confirmar Contraseña</label>
+                    <input type="password" id="regPasswordConfirm" name="passwordConfirm" required>
+                    <span class="error-message" id="regPasswordConfirmError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="regDirection">Dirección (Estado)</label>
+                    <input type="text" id="regDirection" name="direction" required>
+                    <span class="error-message" id="regDirectionError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Registrarse</button>
+
+                <div class="auth-links">
+                    <a onclick="showLogin()">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE RECUPERAR CONTRASEÑA -->
+    <div class="auth-container" id="forgotPasswordModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Recuperar Contraseña</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                Ingresa tu id y nueva contraseña
+            </p>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="regId">ID de usuario</label>
+                    <input type="number" id="regId" name="id" min="1" required>
+                    <span class="error-message" id="regIdError"></span>
+                    
+                    <label for="forgotPass">Nueva Contraseña</label>
+                    <input type="password" id="forgotPass" name="contra1" required>
+                    <span class="error-message" id="forgotPassError"></span>
+                    
+                    <label for="forgotPass2">Confirmar Contraseña</label>
+                    <input type="password" id="forgotPass2" name="contra2" required>
+                    <span class="error-message" id="forgotPass2Error"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Restablecer Contraseña</button>
+
+                <div class="auth-links">
+                    <a onclick="showLogin()">Volver al inicio de sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <section id="nosotros">
+            <!-- ENCABEZADO -->
+            <div class="nosotros-header">
+                <h2>Nosotros</h2>
+                <p class="intro">
+                    Somos estudiantes de 5º semestre de la carrera de <strong>Ingeniería en Sistemas Computacionales</strong> 
+                    de la <strong>Universidad Autónoma de Aguascalientes</strong>. Este proyecto representa nuestro compromiso 
+                    con la innovación tecnológica y el emprendimiento digital, aplicando los conocimientos adquiridos para 
+                    crear una plataforma de comercio electrónico enfocada en productos naturales de miel.
+                </p>
+            </div>
+
+            <!-- EQUIPO -->
+            <div class="instructores">
+                <div class="instructor">
+                    <div class="instructor-image">
+                        <img src="media/instructor 1.jpg" alt="Andrea Elizabeth">
+                    </div>
+                    <h3>Andrea Elizabeth</h3>
+                    <p>Especialista en sistemas Linux y seguridad informática. Con más de 5 años de experiencia enseñando administración de servidores.</p>
+                    <a href="https://www.instagram.com/elizabethbutterfly2116/" target="_blank" class="instagram-link">
+                        <img src="media/insta.png" alt="Instagram" class="icono">
+                    </a>
+                </div>
+
+                <div class="instructor">
+                    <div class="instructor-image">
+                        <img src="media/instructor 3.png" alt="Oscar Santiago">
+                    </div>
+                    <h3>Oscar Diaz</h3>
+                    <p>Ingeniera en software con experiencia en inteligencia artificial y certificaciones técnicas internacionales.</p>
+                    <a href="https://www.instagram.com/oscarlop.12/" target="_blank" class="instagram-link">
+                        <img src="media/insta.png" alt="Instagram" class="icono">
+                    </a>
+                </div>
+
+                <div class="instructor">
+                    <div class="instructor-image">
+                        <img src="media/instructor 4.jpg" alt="Italia Lucero">
+                    </div>
+                    <h3>Italia Lucero</h3>
+                    <p>Experta en desarrollo web y bases de datos. Apasionado por enseñar programación de forma clara y práctica.</p>
+                    <a href="https://www.instagram.com/ittaliaa.75/" target="_blank" class="instagram-link">
+                        <img src="media/insta.png" alt="Instagram" class="icono">
+                    </a>
+                </div>
+
+                <div class="instructor">
+                    <div class="instructor-image">
+                        <img src="media/instructor 2.jpg" alt="Jesus Alberto">
+                    </div>
+                    <h3>Jesus Alberto</h3>
+                    <p>Descripción del integrante 4. Especialidad o rol en el proyecto de La Colmena.</p>
+                    <a href="https://www.instagram.com/damasco.alberto80/" target="_blank" class="instagram-link">
+                        <img src="media/insta.png" alt="Instagram" class="icono">
+                    </a>
+                </div>
+
+                <div class="instructor">
+                    <div class="instructor-image">
+                        <img src="media/instructor 5.jpg" alt="Juan Antonio">
+                    </div>
+                    <h3>Juan Antonio</h3>
+                    <p>Descripcion. Especialidad o rol en el proyecto de La Colmena.</p>
+                    <a href="https://www.instagram.com/juanantonioalbacardona/" target="_blank" class="instagram-link">
+                        <img src="media/insta.png" alt="Instagram" class="icono">
+                    </a>
+                </div>
+            </div>
+
+            <!-- MISIÓN Y VISIÓN -->
+            <div class="mision-vision">
+                <div class="mision-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Nuestra Misión</h3>
+                    <p>Desarrollar una plataforma de comercio electrónico innovadora que conecte a productores de miel con consumidores, promoviendo productos naturales de alta calidad y aplicando las mejores prácticas de desarrollo web.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Nuestra Visión</h3>
+                    <p>Consolidar este proyecto como un referente de emprendimiento estudiantil en la UAA, demostrando que la tecnología puede impulsar negocios sustentables y generar impacto positivo en la comunidad.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>La Colmena</h4>
+                        <p>Miel 100% natural y productos derivados de la más alta calidad desde 2020.</p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/la_colmena.2025?igsh=dDc4am9peXUxMTR3" target="_blank">
+                                <img src="media/insta.png" alt="Instagram" class="icono-red">
+                            </a>
+                            <a href="https://www.instagram.com/la_colmena.2025?igsh=dDc4am9peXUxMTR3" target="_blank">
+                                <img src="media/face.png" alt="Instagram" class="icono-red">
+                            </a>
+                            <a href="https://www.instagram.com/la_colmena.2025?igsh=dDc4am9peXUxMTR3" target="_blank">
+                                <img src="media/twitter.png" alt="Instagram" class="icono-red">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Información</h4>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="tienda.html">Productos</a></li>
+                            <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Servicio al Cliente</h4>
+                        <ul>
+                            <li><a href="contactanos.html">Contacto</a></li>
+                            <li><a href="#">Envíos</a></li>
+                            <li><a href="#">Devoluciones</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <ul class="contact-info">
+                            <li>📞 449 - 456 - 7890</li>
+                            <li>✉️ lacolmena525@gmail.com</li>
+                            <li>📍 Calle Principal #123</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+                    <p>ESTA PAGINA ES UN PROYECTO ACADEMICO DE LA UNIVERSIDAD AUTONOMA DE AGUASCALIENTES</p>
+                </div>
+            </div>
+        </footer> 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/auth.js"></script>  
+    <script src="js/accesibilidad.js"></script> 
+</body>
+</html>

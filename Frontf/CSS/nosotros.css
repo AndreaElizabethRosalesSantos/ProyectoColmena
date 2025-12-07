@@ -1,0 +1,464 @@
+/* ============================================
+   NOSOTROS - LA COLMENA
+   ============================================ */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #fafafa;
+    color: #2c2c2c;
+    line-height: 1.6;
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* ============================================
+   SECCIÓN NOSOTROS
+   ============================================ */
+
+#nosotros {
+    background: #f8f9fa;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    max-width: 100vw;
+}
+
+/* ============================================
+   HEADER DE NOSOTROS
+   ============================================ */
+
+.nosotros-header {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 50px 40px;
+    background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(255, 193, 7, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.nosotros-header::before {
+    content: '🐝';
+    position: absolute;
+    font-size: 100px;
+    opacity: 0.1;
+    top: -20px;
+    right: 60px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.nosotros-header::after {
+    content: '🍯';
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.1;
+    bottom: -10px;
+    left: 60px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+#nosotros h2 {
+    color: #5D4037;
+    font-size: 46px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+#nosotros .intro {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #6D4C41;
+    font-size: 17px;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+}
+
+#nosotros .intro strong {
+    color: #5D4037;
+    font-weight: 700;
+}
+
+/* ============================================
+   GRID DE INSTRUCTORES
+   ============================================ */
+
+.instructores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.instructor {
+    flex: 0 0 280px;
+    max-width: 100%;
+}
+
+/* ============================================
+   TARJETAS DE INTEGRANTES
+   ============================================ */
+
+.instructor {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.15);
+    padding: 35px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid #FFE082;
+    position: relative;
+    overflow: hidden;
+}
+
+.instructor::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #FFC107 0%, #F57C00 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.instructor:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 32px rgba(255, 193, 7, 0.3);
+    border-color: #FFC107;
+}
+
+.instructor:hover::before {
+    transform: scaleX(1);
+}
+
+.instructor-image {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #FFE082;
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.3);
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+    transition: all 0.3s ease;
+}
+
+.instructor:hover .instructor-image {
+    border-color: #FFC107;
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(255, 193, 7, 0.5);
+}
+
+.instructor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.instructor h3 {
+    color: #5D4037;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.instructor p {
+    font-size: 15px;
+    color: #6D4C41;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   ENLACE DE INSTAGRAM (MODIFICADO)
+   ============================================ */
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* === CAMBIO AQUI: icono → icono-inst === */
+.icono-inst {
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+    filter: grayscale(0);
+    border-radius: 8px;
+}
+
+/* === CAMBIO AQUI: icono → icono-inst === */
+.instructor:hover .icono-inst {
+    transform: scale(1.15) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(255, 193, 7, 0.4));
+}
+
+/* ============================================
+   MISIÓN Y VISIÓN
+   ============================================ */
+
+.mision-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 70px auto 0;
+    padding: 0 20px;
+}
+
+.mision-card,
+.vision-card {
+    background: white;
+    padding: 40px 35px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.15);
+    border: 2px solid #FFE082;
+    transition: all 0.3s ease;
+}
+
+.mision-card:hover,
+.vision-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 28px rgba(255, 193, 7, 0.25);
+    border-color: #FFC107;
+}
+
+.card-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.mision-card h3,
+.vision-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #5D4037;
+    margin-bottom: 15px;
+}
+
+.mision-card p,
+.vision-card p {
+    font-size: 15px;
+    color: #6D4C41;
+    line-height: 1.7;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .instructores {
+        gap: 30px;
+    }
+    
+    .instructor {
+        flex: 0 0 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    #nosotros {
+        padding: 40px 16px;
+    }
+    
+    .nosotros-header {
+        padding: 40px 28px;
+        margin-bottom: 40px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    
+    #nosotros h2 {
+        font-size: 36px;
+    }
+    
+    #nosotros .intro {
+        font-size: 16px;
+    }
+    
+    .nosotros-header::before,
+    .nosotros-header::after {
+        font-size: 70px;
+    }
+    
+    .instructores {
+        gap: 25px;
+        padding: 0 16px;
+    }
+    
+    .instructor {
+        flex: 0 0 240px;
+    }
+    
+    .instructor {
+        padding: 30px 20px;
+    }
+    
+    .instructor-image {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .instructor h3 {
+        font-size: 20px;
+    }
+    
+    .instructor p {
+        font-size: 14px;
+    }
+    
+    .mision-vision {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-top: 50px;
+        padding: 0 16px;
+    }
+    
+    .mision-card,
+    .vision-card {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    #nosotros {
+        padding: 40px 12px;
+    }
+    
+    .nosotros-header {
+        padding: 30px 20px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+    
+    #nosotros h2 {
+        font-size: 30px;
+    }
+    
+    #nosotros .intro {
+        font-size: 15px;
+    }
+    
+    .nosotros-header::before,
+    .nosotros-header::after {
+        display: none;
+    }
+    
+    .instructores {
+        gap: 20px;
+        padding: 0 12px;
+    }
+    
+    /* Asegura que cada tarjeta limite el contenido */
+.instructor {
+    position: relative;
+    overflow: hidden;     /* evita que el icono se salga */
+    padding-bottom: 50px; /* deja espacio para el icono */
+}
+
+/* Imagen del instructor */
+.instructor-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Ícono de Instagram */
+.instagram-link {
+    position: absolute;
+    bottom: 15px;   /* separa del borde */
+    right: 15px;    /* esquina derecha */
+    z-index: 10;
+}
+
+.instagram-link .icono {
+    width: 5px;
+    height: 5px;
+    transition: transform 0.2s;
+}
+
+.instagram-link:hover .icono {
+    transform: scale(1.1);
+}
+
+    
+    .mision-vision {
+        padding: 0 12px;
+    }
+    
+    .card-icon {
+        font-size: 40px;
+    }
+    
+    .mision-card h3,
+    .vision-card h3 {
+        font-size: 20px;
+    }
+    
+    .mision-card,
+    .vision-card {
+        padding: 25px 20px;
+    }
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.instructor {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.instructor:nth-child(1) { animation-delay: 0.1s; }
+.instructor:nth-child(2) { animation-delay: 0.2s; }
+.instructor:nth-child(3) { animation-delay: 0.3s; }
+.instructor:nth-child(4) { animation-delay: 0.4s; }
+.instructor:nth-child(5) { animation-delay: 0.5s; }
+
+.instructor .instagram-link .icono,
+.instructor .instagram-link .icono-inst {
+    width: 30px;
+    height: 30px;
+    display: block;
+    object-fit: contain;
+}
+@media (max-width: 480px) {
+    .instructor .instagram-link .icono,
+    .instructor .instagram-link .icono-inst {
+        width: 25px;
+        height: 25px;
+    }
+}

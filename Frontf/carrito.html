@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/carrito.css">
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <title>Carrito - LA COLMENA</title>
+</head>
+<body>
+
+    <!-- ABEJAS EN MOVIMIENTO -->
+    <div class="abeja abeja1">🐝</div>
+    <div class="abeja abeja2">🐝</div>
+    <div class="abeja abeja3">🐝</div>
+    <div class="abeja abeja4">🐝</div>
+    <div class="abeja abeja5">🐝</div>
+
+    <!-- TÍTULO TIPO COLMENA -->
+    <h1 class="titulo-carrito">
+          🛒 CARRITO DE COMPRAS  
+       <span class="subtitulo-colmena">LA COLMENA</span>
+    </h1>
+
+    <!-- BOTÓN REGRESAR -->
+    <a href="tienda.html" class="regresar-carrito">⬅ Volver a la tienda</a>
+    
+    <!-- CARRITO VACÍO -->
+    <div id="carrito-vacio" class="colmena-marco">
+        <h3>Tu carrito está vacío 🍯</h3>
+        <a href="tienda.html" class="btn-ir-comprar">Ir a comprar 🍯</a>
+    </div>
+    
+    <!-- CARRITO CON PRODUCTOS -->
+    <div id="carrito-contenido" style="display: none;">
+        <div id="items-carrito"></div>
+        
+        <!-- SECCIÓN DE CUPÓN -->
+        <div class="cupon-section colmena-marco">
+            <h3>🎟️ ¿Tienes un cupón?</h3>
+            <div>
+                <div>
+                    <input 
+                        type="text" 
+                        id="input-cupon" 
+                        placeholder="Ingresa tu código"
+                        oninput="validarInputCupon(this)"
+                    >
+                    <p id="mensaje-cupon"></p>
+                </div>
+                <button 
+                    id="btn-aplicar-cupon"
+                    onclick="aplicarCupon()"
+                >
+                    Aplicar
+                </button>
+                <button 
+                    id="btn-quitar-cupon"
+                    onclick="quitarCupon()"
+                    style="display: none;"
+                >
+                    Quitar
+                </button>
+            </div>
+        </div>
+        
+        <div class="resumen colmena-marco">
+            <h3>📋 Resumen de compra</h3>
+            
+            <!-- ✅ SELECTOR DE PAÍS OBLIGATORIO -->
+            <div style="margin-bottom: 20px;">
+                <label for="select-pais" class="campo-requerido" style="display: block; margin-bottom: 8px; font-weight: bold; color: #5a4a3f; text-align: left;">
+                    País de envío
+                </label>
+                <select 
+                    id="select-pais" 
+                    onchange="actualizarCostoEnvio()"
+                    required
+                >
+                    <option value="">Selecciona un país</option>
+                    <option value="MX">🇲🇽 México</option>
+                    <option value="Otro">🌎 Otro país</option>
+                </select>
+                <small style="color: #7a6a40; font-size: 13px; margin-top: 5px; display: block; text-align: left;">
+                    * Campo obligatorio para continuar con la compra
+                </small>
+            </div>
+
+            <p>Subtotal: $<span id="subtotal">0</span></p>
+            <p>Impuestos (16%): $<span id="impuestos">0</span></p>
+            <p id="envio-row">Gastos de envío: $<span id="envio">150.00</span></p>
+            <p id="descuento-row" style="display: none; color: #27ae60; font-weight: 600;">
+                Descuento: -$<span id="descuento">0</span>
+            </p>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+            
+            <div class="botones-carrito">
+                 <button class="btn-vaciar" onclick="vaciarCarrito()">🗑️ Vaciar Carrito</button>
+                 <button class="btn-comprar" onclick="crearOrden()">🛍️ Comprar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GOTAS DE MIEL ANIMADAS -->
+    <div class="gota-miel gota1"></div>
+    <div class="gota-miel gota2"></div>
+    <div class="gota-miel gota3"></div>
+
+    <script src="js/carrito.js"></script>
+</body>
+</html>

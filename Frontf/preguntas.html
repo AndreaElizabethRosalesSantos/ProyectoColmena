@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA COLMENA</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="CSS/preguntas.css">
+    <link rel="stylesheet" href="CSS/login.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="CSS/accsPreg.css">
+</head>
+<body>
+    
+    <div class="header-logo">
+        <img src="media/header.gif" alt="Logo de la tienda">
+    </div>
+
+    <nav class="section-bar">
+        <div class="left-sections">
+            <a href="inicio.html">INICIO</a>
+            <a href="tienda.html">TIENDA</a>
+            <a href="preguntas.html" class="active">PREGUNTAS FRECUENTES</a>
+            <a href="contactanos.html">CONTÁCTANOS</a>
+            <a href="nosotros.html">NOSOTROS</a>
+        </div>
+
+        <div class="right-icons">
+            <div class="user-section" id="userSection">
+                <span class="username-display">👤 <span id="usernameDisplay"></span></span>
+                <button class="logout-btn" id="logoutBtn" title="Cerrar sesión">🚪</button>
+            </div>
+        
+        <button class="login-btn" id="showLoginBtn" title="Iniciar sesión">🔐</button>
+        
+        <a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a>
+        </div>
+    </nav>
+<button class="accessibility-btn" id="openPanel">♿</button>
+
+    <!-- Panel lateral flotante -->
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            <h2>Accesibilidad</h2>
+            <span id="closePanel" class="close-x">×</span>
+        </div>
+
+        <h3>Modo de Contraste</h3>
+        <div class="contrast-options">
+            <button class="contrast-btn active" id="lightMode">
+                <span>☀️</span> Claro
+            </button>
+            <button class="contrast-btn" id="darkMode">
+                <span>🌙</span> Oscuro
+            </button>
+        </div>
+
+        <h3>Tamaño de Texto</h3>
+        <div class="text-size-box">
+            <div class="size-display">
+                <span class="percentage" id="textPercent">100%</span>
+                <span class="pixels" id="pixelSize">16px</span>
+            </div>
+            
+            <input type="range" 
+                class="text-slider" 
+                id="textSlider" 
+                min="80" 
+                max="150" 
+                value="100" 
+                step="10">
+            
+            <div class="slider-labels">
+                <span>Pequeño</span>
+                <span>Grande</span>
+            </div>
+            
+            <div class="size-buttons">
+                <button class="size-btn" id="sizeSmall">Pequeño</button>
+                <button class="size-btn active" id="sizeNormal">Normal</button>
+                <button class="size-btn" id="sizeGrande">Grande</button>
+            </div>
+        </div>
+
+        <button class="reset-btn" id="resetAll">
+            <span>🔄</span> Restaurar
+        </button>
+    </div>
+    <!--LOGIN -->
+    <div class="auth-container" id="loginModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email o Usuario</label>
+                    <input type="text" id="loginEmail" name="email" required>
+                    <span class="error-message" id="loginEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <span class="error-message" id="loginPasswordError"></span>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="captcha-container">
+                    <div class="captcha-image" id="captchaContainer">
+                        <img id="captchaImage" src="" alt="CAPTCHA">
+                    </div>
+                        <button type="button" class="captcha-reload" onclick="generarCaptcha()">🔄 Nuevo Captcha</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="captchaInput">Ingresa el texto del CAPTCHA</label>
+                    <input type="text" id="captchaInput" name="captcha" required autocomplete="off">
+                    <span class="error-message" id="captchaError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Iniciar Sesión</button>
+
+                <div class="auth-links">
+                    <a onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
+                    <span class="separator">|</span>
+                    <a onclick="showRegister()">Crear cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE REGISTRO -->
+    <div class="auth-container" id="registerModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Nombre Completo</label>
+                    <input type="text" id="regName" name="name" required>
+                    <span class="error-message" id="regNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" required>
+                    <span class="error-message" id="regEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regUsername">Usuario</label>
+                    <input type="text" id="regUsername" name="username" required>
+                    <span class="error-message" id="regUsernameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPhone">Teléfono</label>
+                    <input type="tel" id="regPhone" name="phone" required>
+                    <span class="error-message" id="regPhoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Contraseña</label>
+                    <input type="password" id="regPassword" name="password" required>
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <span class="error-message" id="regPasswordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPasswordConfirm">Confirmar Contraseña</label>
+                    <input type="password" id="regPasswordConfirm" name="passwordConfirm" required>
+                    <span class="error-message" id="regPasswordConfirmError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="regDirection">Dirección (Estado)</label>
+                    <input type="text" id="regDirection" name="direction" required>
+                    <span class="error-message" id="regDirectionError"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Registrarse</button>
+
+                <div class="auth-links">
+                    <a onclick="showLogin()">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE RECUPERAR CONTRASEÑA -->
+    <div class="auth-container" id="forgotPasswordModal">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <h2>Recuperar Contraseña</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                Ingresa tu id y nueva contraseña
+            </p>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="regId">ID de usuario</label>
+                    <input type="number" id="regId" name="id" min="1" required>
+                    <span class="error-message" id="regIdError"></span>
+                    
+                    <label for="forgotPass">Nueva Contraseña</label>
+                    <input type="password" id="forgotPass" name="contra1" required>
+                    <span class="error-message" id="forgotPassError"></span>
+                    
+                    <label for="forgotPass2">Confirmar Contraseña</label>
+                    <input type="password" id="forgotPass2" name="contra2" required>
+                    <span class="error-message" id="forgotPass2Error"></span>
+                </div>
+
+                <button type="submit" class="auth-button">Restablecer Contraseña</button>
+
+                <div class="auth-links">
+                    <a onclick="showLogin()">Volver al inicio de sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <div class="faq-container">
+            <!-- ENCABEZADO -->
+            <header class="faq-header">
+                <h1>Preguntas Frecuentes</h1>
+                <p>Encuentra respuestas a las dudas más comunes sobre nuestros productos de miel natural</p>
+            </header>
+
+            <!-- SECCIÓN: PEDIDOS Y ENTREGAS -->
+            <section class="faq-section">
+                <h2>Sobre Pedidos y Entregas</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cuál es el tiempo de entrega?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nuestro tiempo de entrega estándar es de 24 a 48 horas para pedidos dentro de la ciudad. Para pedidos de grandes volúmenes, puede tomar de 2 a 3 días hábiles. Te notificaremos por correo electrónico cuando tu pedido esté listo para entrega.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cuál es el monto mínimo de pedido?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>El monto mínimo de pedido es de $200 MXN para entregas a domicilio. Para pedidos menores, puedes recoger directamente en nuestra tienda sin costo adicional.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Hacen entregas los fines de semana?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, realizamos entregas de lunes a sábado de 9:00 AM a 6:00 PM. Los domingos solo atendemos pedidos especiales con reservación previa de al menos 48 horas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: PRODUCTOS Y CALIDAD -->
+            <section class="faq-section">
+                <h2>Productos y Calidad</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Su miel es 100% pura y natural?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, toda nuestra miel es 100% pura, natural y sin aditivos. Trabajamos directamente con apicultores locales que siguen prácticas sostenibles. Cada lote es analizado para garantizar su pureza y calidad. No contiene azúcares añadidos, conservadores ni procesos de pasteurización que alteren sus propiedades naturales.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Qué tipos de miel tienen disponibles?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Contamos con una amplia variedad de mieles: miel de azahar, mezquite, multifloral, eucalipto y miel de abeja sin aguijón (melipona). También ofrecemos productos derivados como propóleo, polen, jalea real y cera de abeja. Cada tipo tiene características únicas de sabor y propiedades.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cuánto tiempo dura la miel?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>La miel pura no caduca si se almacena correctamente. Puede cristalizarse con el tiempo, pero esto es un proceso natural que no afecta su calidad. Para devolverle su consistencia líquida, simplemente calienta el frasco a baño maría. Te recomendamos almacenarla en un lugar fresco y seco, alejada de la luz directa del sol.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿La miel cristalizada es de mala calidad?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>¡Todo lo contrario! La cristalización es una señal de miel pura y de alta calidad. Este proceso natural ocurre cuando la glucosa de la miel se solidifica. La velocidad de cristalización depende del tipo de flores y la temperatura de almacenamiento. Puedes consumirla cristalizada o licuarla nuevamente sin problema.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: PAGOS Y DEVOLUCIONES -->
+            <section class="faq-section">
+                <h2>Pagos y Devoluciones</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Qué métodos de pago aceptan?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Aceptamos efectivo, tarjetas de crédito y débito (Visa, Mastercard, American Express), transferencias bancarias y pagos mediante plataformas digitales como PayPal y Mercado Pago.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Puedo cancelar mi pedido?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Puedes cancelar tu pedido sin costo hasta 12 horas antes de la hora de entrega programada. Para cancelaciones posteriores, se aplicará un cargo del 30% del valor total del pedido.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Tienen política de devoluciones?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Si no estás satisfecho con tu pedido, aceptamos devoluciones dentro de las primeras 24 horas. El producto debe estar en condiciones originales. Contáctanos inmediatamente y resolveremos tu situación con un reembolso o cambio de producto.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN DE CONTACTO -->
+            <section class="faq-contact">
+                <h3>¿No encontraste tu respuesta?</h3>
+                <p>Estamos aquí para ayudarte. Contáctanos directamente:</p>
+                <div class="contact-buttons">
+                    <a href="contactanos.html" class="btn-primary">Enviar mensaje</a>
+                    <a href="tel:+524491234567" class="btn-secondary">Llamar ahora</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>La Colmena</h4>
+                        <p>Miel 100% natural y productos derivados de la más alta calidad desde 2020.</p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/la_colmena.2025?igsh=dDc4am9peXUxMTR3" target="_blank">
+                                <img src="media/insta.png" alt="Instagram" class="icono-red">
+                            </a>
+                            <a href="https://www.instagram.com/la_colmena.2025?igsh=dDc4am9peXUxMTR3" target="_blank">
+                                <img src="media/face.png" alt="Instagram" class="icono-red">
+                            </a>
+                            <a href="https://www.instagram.com/la_colmena.2025?igsh=dDc4am9peXUxMTR3" target="_blank">
+                                <img src="media/twitter.png" alt="Instagram" class="icono-red">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Información</h4>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="tienda.html">Productos</a></li>
+                            <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Servicio al Cliente</h4>
+                        <ul>
+                            <li><a href="contactanos.html">Contacto</a></li>
+                            <li><a href="#">Envíos</a></li>
+                            <li><a href="#">Devoluciones</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <ul class="contact-info">
+                            <li>📞 449 - 456 - 7890</li>
+                            <li>✉️ lacolmena525@gmail.com</li>
+                            <li>📍 Calle Principal #123</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 La Colmena. Todos los derechos reservados.</p>
+                    <p>ESTA PAGINA ES UN PROYECTO ACADEMICO DE LA UNIVERSIDAD AUTONOMA DE AGUASCALIENTES</p>
+                </div>
+            </div>
+        </footer>
+
+    <script src="js/preguntas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/accesibilidad.js"></script>
+</body>
+</html>
