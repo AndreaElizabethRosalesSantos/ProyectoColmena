@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - LA COLMENA</title>
+    <link rel="stylesheet" href="CSS/checkout.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Finalizar Compra</h1>
+            <div class="steps">
+                <span class="step active" id="step1-indicator">1. Envío</span>
+                <span class="arrow">→</span>
+                <span class="step" id="step2-indicator">2. Pago</span>
+            </div>
+        </div>
+
+        <!-- Resumen del pedido (visible en ambos pasos) -->
+        <div class="card order-summary">
+            <h3>📦 Resumen del Pedido</h3>
+            <div id="resumen-items"></div>
+            <div class="totals">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span>$<span id="resumen-subtotal">0.00</span></span>
+                </div>
+                <div class="total-row">
+                    <span>Impuestos (16%):</span>
+                    <span>$<span id="resumen-impuestos">0.00</span></span>
+                </div>
+                <div class="total-row final">
+                    <span><strong>Total:</strong></span>
+                    <span><strong>$<span id="resumen-total">0.00</span></strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Shipping Information -->
+        <div id="step1" class="step-content">
+            <div class="card">
+                <div class="card-header">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <h2>Información de Envío</h2>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="section">
+                    <h3>Datos de Contacto</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre(s) *</label>
+                            <input type="text" id="nombre" required placeholder="Juan">
+                        </div>
+                        <div class="form-group">
+                            <label>Apellidos *</label>
+                            <input type="text" id="apellidos" required placeholder="Pérez García">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico *</label>
+                            <input type="email" id="email" required placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono *</label>
+                            <input type="tel" id="telefono" required placeholder="449 123 4567">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Information -->
+                <div class="section">
+                    <h3>Dirección de Entrega</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Estado *</label>
+                            <select id="estado" required>
+                                <option value="">Selecciona</option>
+                                <option value="Aguascalientes">Aguascalientes</option>
+                                <option value="CDMX">Ciudad de México</option>
+                                <option value="Jalisco">Jalisco</option>
+                                <option value="Nuevo León">Nuevo León</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ciudad *</label>
+                            <input type="text" id="ciudad" required placeholder="Aguascalientes">
+                        </div>
+                        <div class="form-group">
+                            <label>Código Postal *</label>
+                            <input type="text" id="codigoPostal" required maxlength="5" placeholder="20000">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group col-2">
+                            <label>Calle *</label>
+                            <input type="text" id="calle" required placeholder="Av. Constitución">
+                        </div>
+                        <div class="form-group">
+                            <label>No. Exterior *</label>
+                            <input type="text" id="numeroExterior" required placeholder="123">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>No. Interior</label>
+                            <input type="text" id="numeroInterior" placeholder="4B">
+                        </div>
+                        <div class="form-group col-2">
+                            <label>Colonia *</label>
+                            <input type="text" id="colonia" required placeholder="Centro">
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group full-width">
+                        <label>Referencias (opcional)</label>
+                        <textarea id="referencias" rows="2" placeholder="Entre qué calles, color de casa, puntos de referencia..."></textarea>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-large" onclick="continueToPayment()">
+                    Continuar al Pago →
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Payment Methods -->
+        <div id="step2" class="step-content" style="display: none;">
+            <!-- Payment Method Selection -->
+            <div class="card">
+                <h2>Método de Pago</h2>
+                
+                <div class="payment-methods">
+                    <!-- Credit/Debit Card -->
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="tarjeta" onchange="selectPaymentMethod('tarjeta')">
+                        <div class="payment-content">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                            </svg>
+                            <div class="payment-info">
+                                <p class="payment-title">Tarjeta de Crédito o Débito</p>
+                                <p class="payment-subtitle">Visa, MasterCard, American Express</p>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Bank Transfer -->
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="transferencia" onchange="selectPaymentMethod('transferencia')">
+                        <div class="payment-content">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                            <div class="payment-info">
+                                <p class="payment-title">Transferencia Bancaria</p>
+                                <p class="payment-subtitle">SPEI - Recibirás los datos por correo</p>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- OXXO -->
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="oxxo" onchange="selectPaymentMethod('oxxo')">
+                        <div class="payment-content">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                            <div class="payment-info">
+                                <p class="payment-title">OXXO</p>
+                                <p class="payment-subtitle">Paga en efectivo en cualquier tienda OXXO</p>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Payment Forms -->
+            <div id="paymentForms" style="display: none;">
+                <!-- Credit Card Form -->
+                <div id="cardForm" class="card payment-form" style="display: none;">
+                    <h3>Datos de la Tarjeta</h3>
+                    
+                    <div class="form-group full-width">
+                        <label>Número de Tarjeta *</label>
+                        <input type="text" id="numeroTarjeta" required placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Nombre del Titular *</label>
+                        <input type="text" id="nombreTitular" required placeholder="Como aparece en la tarjeta">
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group">
+                            <label>Mes *</label>
+                            <select id="mesExpiracion" required>
+                                <option value="">MM</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Año *</label>
+                            <select id="anioExpiracion" required>
+                                <option value="">AA</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV *</label>
+                            <input type="text" id="cvv" required placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <p>🔒 Tu pago está protegido con encriptación SSL</p>
+                    </div>
+                </div>
+
+                <!-- Bank Transfer Form -->
+                <div id="transferForm" class="card payment-form" style="display: none;">
+                    <h3>Información de Transferencia</h3>
+                    
+                    <div class="alert alert-warning">
+                        <p class="alert-title">📋 Instrucciones de pago:</p>
+                        <ul>
+                            <li>Recibirás los datos bancarios por correo</li>
+                            <li>Realiza la transferencia SPEI</li>
+                            <li>Tu pedido se procesará al confirmar el pago</li>
+                            <li>Tiempo de procesamiento: 24-48 horas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- OXXO Form -->
+                <div id="oxxoForm" class="card payment-form" style="display: none;">
+                    <h3>Pago en OXXO</h3>
+                    
+                    <div class="alert alert-info">
+                        <p class="alert-title">¿Cómo funciona?</p>
+                        <ol>
+                            <li>Confirma tu pedido y recibe tu ficha por correo</li>
+                            <li>Acude a cualquier tienda OXXO</li>
+                            <li>Indica que deseas hacer un pago de servicio</li>
+                            <li>Muestra el código de barras o dicta la referencia</li>
+                            <li>Realiza el pago en efectivo</li>
+                        </ol>
+                    </div>
+
+                    <div class="payment-amount">
+                        <div class="amount-row">
+                            <span class="amount-label">Monto a pagar:</span>
+                            <div class="amount-display">
+                                <span class="amount-currency">$</span>
+                                <span id="total-oxxo" class="amount-value">0.00</span>
+                                <span class="amount-currency">MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="goBackToShipping()">
+                        ← Regresar
+                    </button>
+                    <button class="btn btn-success btn-large" onclick="finalizePurchase()">
+                        Confirmar Pedido 🛒
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-container" style="display: none;">
+            <div class="success-card">
+                <div class="success-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h2>¡Pedido Confirmado!</h2>
+                <p id="successText"></p>
+                <div class="order-number">
+                    <p>Número de orden</p>
+                    <p id="orderNumber"></p>
+                </div>
+                <button class="btn btn-primary btn-large" onclick="window.location.href='tienda.html'">
+                    Volver a la tienda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/checkout.js"></script>
+</body>
+</html>
